@@ -1,0 +1,19 @@
+.container {
+   padding: 24px;
+   border-radius: 5px;
+   border: 1px solid var(--gray-light, #dadada);
+   background: var(--white, #fff);
+}
+.header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.header_title {
+   font-family: Poppins;
+   font-size: 16px;
+   font-style: normal;
+   font-weight: 600;
+   line-height: 100%; /* 16px */
+   letter-spacing: -0.8px;
+}

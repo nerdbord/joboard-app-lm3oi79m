@@ -1,0 +1,16 @@
+.filter_section_wrapper {
+   width: 500px;
+}
+.filter_section_title {
+   color: var(--gray-darkest, #212121);
+   font-family: Poppins;
+   font-size: 12px;
+   font-style: normal;
+   font-weight: 600;
+   line-height: 100%;
+   text-align: left;
+}
+.filter_section_chexbox {
+   display: flex;
+   gap: 10px;
+}

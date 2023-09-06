@@ -1,0 +1,30 @@
+.hidden {
+   opacity: 0;
+   width: 0;
+   height: 0;
+}
+.checkbox {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
+   appearance: none;
+}
+.label {
+   min-width: 100px;
+   text-align: left;
+   color: #000;
+   color: var(--gray-darkest, #212121);
+   font-family: Poppins;
+   font-size: 14px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: 130%;
+   cursor: pointer;
+   padding-bottom: 20px;
+}
+.checkbox_wrapper {
+   display: flex;
+   gap: 9px;
+   width: 115px;
+}

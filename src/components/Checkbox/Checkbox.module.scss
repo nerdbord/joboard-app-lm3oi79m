@@ -1,3 +1,4 @@
+@use '../../scss/abstracts/' as *;
 .hidden {
    opacity: 0;
    width: 0;
@@ -14,7 +15,7 @@
    min-width: 100px;
    text-align: left;
    color: #000;
-   color: var(--gray-darkest, #212121);
+   color: $gray-darkest;
    font-family: Poppins;
    font-size: 14px;
    font-style: normal;

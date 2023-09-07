@@ -1,0 +1,41 @@
+@use '../../scss/abstracts/' as *;
+.container {
+   background: $white;
+   //    padding: 0 40px;
+   width: 797px;
+   height: 94px;
+}
+
+.list {
+   margin-top: 16px;
+   list-style: none;
+   background: $gray-lightest;
+}
+.offers_counter {
+   color: var(--gray-darkest, #212121);
+   font-family: Poppins;
+   font-size: 16px;
+   font-style: normal;
+   font-weight: 600;
+   line-height: 100%;
+   letter-spacing: -0.8px;
+}
+.list_element {
+   background-color: white;
+   min-width: 800px;
+   padding: 24px;
+   display: flex;
+   justify-content: space-between;
+   border-radius: 5px;
+   border: 1px solid $gray-light;
+   margin-bottom: 8px;
+}
+.offer_date {
+   color: $gray-dark;
+   text-align: right;
+   font-family: Poppins;
+   font-size: 12px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: 100%;
+}

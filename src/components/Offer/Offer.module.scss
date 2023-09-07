@@ -1,0 +1,54 @@
+@use '../../scss/abstracts/' as *;
+
+.job_title_wrapper {
+   display: flex;
+   gap: 25px;
+}
+.job_title {
+   color: $gray-darkest;
+   font-family: Poppins;
+   font-size: 20px;
+   font-style: normal;
+   font-weight: 600;
+   line-height: 130%;
+   letter-spacing: -0.4px;
+}
+
+.info_wrapper {
+   margin-top: 5px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 15px;
+}
+
+.single_info {
+   color: $gray-dark;
+   font-family: Poppins;
+   font-size: 12px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: 100%;
+   padding: 0 15px;
+   border-right: 1px solid $gray-light;
+}
+
+.company_name {
+   color: $gray-darkest;
+   font-family: Poppins;
+   font-size: 12px;
+   font-style: normal;
+   font-weight: 500;
+   line-height: 100%;
+   padding-right: 15px;
+   border-right: 1px solid $gray-light;
+}
+
+.salary {
+   color: $accent;
+   font-family: Poppins;
+   font-size: 12px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: 100%;
+}

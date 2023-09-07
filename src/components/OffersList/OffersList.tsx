@@ -3,7 +3,7 @@ import styles from './OffersList.module.scss';
 import Offer from '../Offer/Offer';
 
 interface OfferData {
-   id: number;
+   _id: string;
    title: string;
    companyName: string;
    companyLocation: string;
@@ -22,7 +22,7 @@ const OffersList: React.FC<OffersListProps> = ({ offers }) => {
       <div className={styles.container}>
          <ul className={styles.list}>
             {offers.map((offer) => (
-               <li key={offer.id} className={styles.list_element}>
+               <li key={offer._id} className={styles.list_element}>
                   <Offer
                      title={offer.title}
                      companyName={offer.companyName}

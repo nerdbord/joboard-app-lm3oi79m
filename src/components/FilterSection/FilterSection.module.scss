@@ -1,8 +1,10 @@
+@use '../../scss/abstracts/' as *;
+
 .filter_section_wrapper {
    width: 500px;
 }
 .filter_section_title {
-   color: var(--gray-darkest, #212121);
+   color: $gray-darkest;
    font-family: Poppins;
    font-size: 12px;
    font-style: normal;

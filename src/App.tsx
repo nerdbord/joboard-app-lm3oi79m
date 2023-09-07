@@ -7,7 +7,7 @@ import OffersContainer from './components/OffersContainer/OffersContainer';
 function App() {
    return (
       <Container>
-         <h1>👾 JO–BOARD</h1>
+         {/* <h1>👾 JO–BOARD</h1> */}
          <FiltersContainer />
          <OffersContainer />
       </Container>

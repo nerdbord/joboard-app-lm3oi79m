@@ -5,11 +5,7 @@
 }
 .filter_section_title {
    color: $gray-darkest;
-   font-family: Poppins;
-   font-size: 12px;
-   font-style: normal;
-   font-weight: 600;
-   line-height: 100%;
+   font: $semibold12;
    text-align: left;
 }
 .filter_section_chexbox {

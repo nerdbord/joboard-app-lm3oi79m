@@ -3,6 +3,8 @@
    margin: 0 auto;
    padding: 0 24px;
    display: flex;
+   gap: 10px;
+
    @media only screen and (max-width: 768px) {
       padding: 0 8px;
    }

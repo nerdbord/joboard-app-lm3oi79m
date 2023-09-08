@@ -3,9 +3,15 @@
 .offers_counter {
    color: $gray-darkest;
    font-family: Poppins;
-   font-size: 16px;
-   font-style: normal;
-   font-weight: 600;
-   line-height: 100%;
-   letter-spacing: -0.8px;
+   font: $semibold16;
+}
+.offers_container {
+   display: inline-flex;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 24px;
+   background-color: $gray-lightest;
+   width: 877px;
+   height: 1081px;
+   flex-shrink: 0;
 }

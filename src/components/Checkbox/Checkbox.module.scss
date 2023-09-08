@@ -16,11 +16,7 @@
    text-align: left;
    color: #000;
    color: $gray-darkest;
-   font-family: Poppins;
-   font-size: 14px;
-   font-style: normal;
-   font-weight: 400;
-   line-height: 130%;
+   font: $regular14;
    cursor: pointer;
    padding-bottom: 20px;
 }

@@ -22,14 +22,17 @@ const Offer: React.FC<OfferData> = ({
    return (
       <div className={styles.job_title_wrapper}>
          <img className={styles.company_logo} src={offerUrl} alt="company logo" />
-         <span className={styles.job_title}>{title}</span>
-         <div className={styles.info_wrapper}>
-            <p className={styles.company_name}>{companyName}</p>
-            <p className={styles.single_info}>{city}</p>
-            <p className={styles.single_info}>{jobType}</p>
-            <p className={styles.single_info}>{seniority}</p>
-            <p className={styles.salary}>{salaryFrom}</p>
-            <p className={styles.salary}>{salaryTo}</p>
+         <div className={styles.test}>
+            <span className={styles.job_title}>{title}</span>
+            <div className={styles.info_wrapper}>
+               <p className={styles.company_name}>{companyName}</p>
+               <p className={styles.single_info}>{city}</p>
+               <p className={styles.single_info}>{jobType}</p>
+               <p className={styles.single_info}>{seniority}</p>
+               <p className={styles.salary}>
+                  {salaryFrom} - {salaryTo} net
+               </p>
+            </div>
          </div>
       </div>
    );

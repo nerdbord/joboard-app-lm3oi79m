@@ -3,7 +3,8 @@
    padding: 24px;
    border-radius: 5px;
    border: 1px solid $gray-light;
-   background: var(--white, #fff);
+   background: $white;
+   margin: 110px;
 }
 .header {
    display: flex;
@@ -11,10 +12,6 @@
    align-items: center;
 }
 .header_title {
-   font-family: Poppins;
-   font-size: 16px;
-   font-style: normal;
-   font-weight: 600;
-   line-height: 100%; /* 16px */
+   font: $semibold16;
    letter-spacing: -0.8px;
 }

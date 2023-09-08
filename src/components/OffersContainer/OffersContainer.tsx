@@ -73,7 +73,7 @@ const OffersContainer = () => {
    };
 
    return (
-      <div>
+      <div className={styles.offers_container}>
          <Search />
          {getOfferUI()}
       </div>

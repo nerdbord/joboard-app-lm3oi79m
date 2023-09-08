@@ -6,49 +6,47 @@
 }
 .job_title {
    color: $gray-darkest;
-   font-family: Poppins;
-   font-size: 20px;
-   font-style: normal;
-   font-weight: 600;
-   line-height: 130%;
+   font: $semibold20;
    letter-spacing: -0.4px;
 }
 
 .info_wrapper {
-   margin-top: 5px;
    display: flex;
-   justify-content: center;
    align-items: center;
    gap: 15px;
+   height: 12px;
 }
 
 .single_info {
    color: $gray-dark;
-   font-family: Poppins;
-   font-size: 12px;
-   font-style: normal;
-   font-weight: 400;
-   line-height: 100%;
-   padding: 0 15px;
+   font: $regular12;
    border-right: 1px solid $gray-light;
+   padding-right: 14px;
+   margin: 0px;
 }
 
 .company_name {
-   color: $gray-darkest;
-   font-family: Poppins;
-   font-size: 12px;
-   font-style: normal;
-   font-weight: 500;
-   line-height: 100%;
+   color: $gray-dark;
+   font: $medium12;
    padding-right: 15px;
    border-right: 1px solid $gray-light;
 }
 
 .salary {
    color: $accent;
-   font-family: Poppins;
-   font-size: 12px;
-   font-style: normal;
-   font-weight: 400;
-   line-height: 100%;
+   font: $regular12;
+}
+.test {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 8px;
+   height: 46px;
+   padding: 24px;
+}
+.company_logo {
+   padding: 24px 0px 24px 24px;
+   width: 46px;
+   height: 46px;
+   flex-shrink: 0;
 }

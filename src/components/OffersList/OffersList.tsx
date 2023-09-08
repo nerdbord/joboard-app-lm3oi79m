@@ -1,17 +1,7 @@
 import React from 'react';
 import styles from './OffersList.module.scss';
 import Offer from '../Offer/Offer';
-
-interface OfferData {
-   _id: string;
-   title: string;
-   companyName: string;
-   companyLocation: string;
-   companyJobType: string;
-   companySeniority: string;
-   companyLogo: string;
-   companySalary: string;
-}
+import { OfferData } from '../../interfaces/OfferData';
 
 interface OffersListProps {
    offers: OfferData[];

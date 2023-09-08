@@ -1,15 +1,6 @@
 import React from 'react';
 import styles from './Offer.module.scss'; // Import the SCSS module
-
-interface OfferProps {
-   title: string;
-   companyName: string;
-   companyLocation: string;
-   companyJobType: string;
-   companySeniority: string;
-   companyLogo: string;
-   companySalary: string;
-}
+import { OfferProps } from '../../interfaces/OfferProps';
 
 const Offer: React.FC<OfferProps> = ({
    title,

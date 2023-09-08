@@ -1,5 +1,4 @@
-export interface OfferData {
-   _id: number;
+export interface OfferProps {
    title: string;
    companyName: string;
    companyLocation: string;

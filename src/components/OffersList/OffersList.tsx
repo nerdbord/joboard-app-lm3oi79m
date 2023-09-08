@@ -1,17 +1,7 @@
 import React from 'react';
 import styles from './OffersList.module.scss';
 import Offer from '../Offer/Offer';
-
-interface OfferData {
-   id: number;
-   title: string;
-   companyName: string;
-   companyLocation: string;
-   companyJobType: string;
-   companySeniority: string;
-   companyLogo: string;
-   companySalary: string;
-}
+import { OfferData } from '../../interfaces/OfferData';
 
 interface OffersListProps {
    offers: OfferData[];
@@ -22,7 +12,7 @@ const OffersList: React.FC<OffersListProps> = ({ offers }) => {
       <div className={styles.container}>
          <ul className={styles.list}>
             {offers.map((offer) => (
-               <li key={offer.id} className={styles.list_element}>
+               <li key={offer._id} className={styles.list_element}>
                   <Offer
                      title={offer.title}
                      companyName={offer.companyName}

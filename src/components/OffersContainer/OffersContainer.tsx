@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './OffersContainer.module.scss';
 import OffersList from '../OffersList/OffersList';
 import { Search } from '../Search/Search';
+import { useQuery } from 'react-query';
+import { getJobOffers } from '../../services/offersApi';
 const jobOffers = [
    {
       id: 1,
@@ -16,14 +18,28 @@ const jobOffers = [
 ];
 
 const OffersContainer = () => {
+   const { data, error, isLoading } = useQuery('jobOffers', getJobOffers);
+
+   const getOfferUI = () => {
+      if (isLoading) {
+         return <div>Loading...</div>;
+      }
+      if (error) {
+         return <div>Error</div>;
+      }
+      if (data) {
+         return (
+            <>
+               <span className={styles.offers_counter}>{data.length} offers found</span>
+               <OffersList offers={data} />
+            </>
+         );
+      }
+   };
    return (
       <div>
          <Search />
-         <span className={styles.offers_counter}>36 offers found</span>
-         <OffersList offers={jobOffers} />
-         <OffersList offers={jobOffers} />
-         <OffersList offers={jobOffers} />
-         <OffersList offers={jobOffers} />
+         {getOfferUI()}
       </div>
    );
 };

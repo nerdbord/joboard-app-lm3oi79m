@@ -12,6 +12,7 @@ const OffersList: React.FC<OffersListProps> = ({ offers }) => {
       return null;
    }
    return (
+      //d
       <div className={styles.container}>
          <ul className={styles.list}>
             {offers.map((offer) => (

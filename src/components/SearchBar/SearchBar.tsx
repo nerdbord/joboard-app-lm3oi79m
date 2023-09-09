@@ -11,7 +11,7 @@ const SearchBar: React.FC<{
    return (
       <div className={styles.container}>
          <div className={styles.inner}>
-            <input type="text" value={value} onChange={onChange} />
+            <input type="text" value={value} onChange={onChange} placeholder="Search location" />
             <button>Search </button>
          </div>
          <div className={styles.dropdown}>

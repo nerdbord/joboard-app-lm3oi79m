@@ -14,4 +14,8 @@
    width: 877px;
    height: 1081px;
    flex-shrink: 0;
+   @include breakpoint(tablet) {
+      display: flex;
+      flex-direction: column;
+   }
 }

@@ -13,29 +13,40 @@
    margin-top: 16px;
    list-style: none;
    background: $gray-lightest;
+   @include breakpoint(tablet) {
+      position: relative;
+      max-height: 900px;
+      overflow-y: auto;
+   }
 }
 .offers_counter {
-   color: var(--gray-darkest, #212121);
-   font-family: Poppins;
-   font-size: 16px;
-   font-style: normal;
-   font-weight: 600;
-   line-height: 100%;
+   color: $gray-darkest;
+   font: $semibold16;
    letter-spacing: -0.8px;
 }
 .list_element {
    background-color: white;
    min-width: 800px;
-   height: 94px;
+   //    height: 92px;
    display: flex;
    justify-content: space-between;
    border-radius: 5px;
    border: 1px solid $gray-light;
-   flex-shrink: 0;
+   padding: 24px;
+   //    flex-shrink: 0;
+   @include breakpoint(tablet) {
+      min-width: 345px;
+      position: relative;
+      height: 184px;
+      flex-shrink: 0px;
+   }
 }
 .offer_date {
    color: $gray-dark;
    text-align: right;
    font: $regular12;
-   padding: 24px;
+   //    padding: 24px;
+   @include breakpoint(tablet) {
+      align-self: self-end;
+   }
 }

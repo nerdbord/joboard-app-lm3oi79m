@@ -1,0 +1,15 @@
+$breakpoints: (
+   'tablet': 'max-width:768px',
+   'desktop': 'min-width:769px',
+);
+
+@mixin breakpoint($user-value) {
+   $my-map: map-get($breakpoints, $user-value);
+   @if $my-map {
+      @media (#{$my-map}) {
+         @content;
+      }
+   } @else {
+      @error "breakpoint #{$user-value} nie jest wybrany";
+   }
+}

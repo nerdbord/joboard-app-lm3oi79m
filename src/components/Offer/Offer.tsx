@@ -21,14 +21,24 @@ const Offer: React.FC<OfferData> = ({
 }) => {
    return (
       <div className={styles.job_title_wrapper}>
-         <img className={styles.company_logo} src={offerUrl} alt="company logo" />
+         <img className={styles.company_logo_desktop} src={offerUrl} alt="company logo" />
          <div className={styles.test}>
             <span className={styles.job_title}>{title}</span>
             <div className={styles.info_wrapper}>
-               <p className={styles.company_name}>{companyName}</p>
-               <p className={styles.single_info}>{city}</p>
-               <p className={styles.single_info}>{jobType}</p>
-               <p className={styles.single_info}>{seniority}</p>
+               <img className={styles.company_logo_mobile} src={offerUrl} alt="company logo" />
+               <div className={styles.mobile_wrapper}>
+                  <div className={styles.box}>
+                     <p className={styles.company_name}>{companyName}</p>
+                     <div className={styles.line}></div>
+                     <p className={styles.single_info}>{city}</p>
+                  </div>
+                  <div className={styles.box}>
+                     <p className={styles.single_info}>{jobType}</p>
+                     <div className={styles.line}></div>
+                     <p className={styles.single_info}>{seniority}</p>
+                  </div>
+               </div>
+
                <p className={styles.salary}>
                   {salaryFrom} - {salaryTo} net
                </p>

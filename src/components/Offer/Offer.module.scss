@@ -3,6 +3,10 @@
 .job_title_wrapper {
    display: flex;
    gap: 25px;
+   @include breakpoint(tablet) {
+      width: 345px;
+      padding: 0;
+   }
 }
 .job_title {
    color: $gray-darkest;
@@ -12,18 +16,29 @@
 
 .info_wrapper {
    display: flex;
-   align-items: center;
+   margin-top: 5px;
    gap: 15px;
-   height: 12px;
+   @include breakpoint(tablet) {
+      position: relative;
+   }
 }
 
 .single_info {
-   //info
    color: $gray-dark;
    font: $regular12;
    border-right: 1px solid $gray-light;
-   padding-right: 14px;
-   margin: 0px;
+   padding: 0px 14px;
+   @include breakpoint(tablet) {
+      border: none;
+      padding: 0;
+      //   padding-right: 15px;
+      //   margin-right: 15px;
+      white-space: nowrap;
+      width: 100%;
+      :nth-child(odd) {
+         border-right: 1px solid #dadada;
+      }
+   }
 }
 
 .company_name {
@@ -31,23 +46,64 @@
    font: $medium12;
    padding-right: 15px;
    border-right: 1px solid $gray-light;
+   @include breakpoint(tablet) {
+      border: none;
+      padding-right: 0;
+      white-space: nowrap;
+      width: 100%;
+   }
 }
 
 .salary {
    color: $accent;
    font: $regular12;
+   @include breakpoint(tablet) {
+      position: absolute;
+      bottom: 0;
+      left: -15px;
+   }
 }
 .test {
-   display: flex;
-   flex-direction: column;
-   align-items: flex-start;
-   gap: 8px;
-   height: 46px;
-   padding: 24px;
+   text-align: left;
 }
-.company_logo {
-   padding: 24px 0px 24px 24px;
-   width: 46px;
-   height: 46px;
-   flex-shrink: 0;
+.company_logo_desktop {
+   @include breakpoint(tablet) {
+      display: none;
+   }
+}
+.company_logo_mobile {
+   @include breakpoint(tablet) {
+      height: 100%;
+      margin-bottom: 40px;
+   }
+   @include breakpoint(desktop) {
+      display: none;
+   }
+}
+.box {
+   @include breakpoint(tablet) {
+      display: flex;
+      flex-direction: row;
+      gap: 14px;
+   }
+   @include breakpoint(desktop) {
+      display: flex;
+      flex-direction: row;
+   }
+}
+.mobile_wrapper {
+   display: flex;
+   flex-direction: row;
+   @include breakpoint(tablet) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 45px;
+   }
+}
+.line {
+   @include breakpoint(tablet) {
+      border-left: 1px solid $gray-light;
+      background-color: #dadada;
+   }
 }

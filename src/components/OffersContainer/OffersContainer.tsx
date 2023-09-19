@@ -31,6 +31,15 @@ const OffersContainer = () => {
             offer.title.toLowerCase().startsWith(jobTitle.toLowerCase()),
          );
          setFilteredOffers(filteredDataByTitle);
+         const cities = filteredDataByTitle.map((item: OfferData) => item.city);
+         const searchOffers = filteredDataByTitle.map((item: OfferData) => ({
+            title: item.title,
+            companyName: item.companyName,
+         }));
+         const notDuplicateCities = [...new Set(cities)];
+         const notDuplcateTitles = [...new Set(searchOffers)];
+         setLocations(notDuplicateCities as string[]);
+         setJobTitles(notDuplcateTitles as JobOffers[]);
       } else if (!jobTitle && !localization) {
          setFilteredOffers(data);
       }
@@ -40,6 +49,15 @@ const OffersContainer = () => {
             offer.city.toLowerCase().startsWith(localization.toLowerCase()),
          );
          setFilteredOffers(filteredDataByLocalization);
+         const cities = filteredDataByLocalization.map((item: OfferData) => item.city);
+         const searchOffers = filteredDataByLocalization.map((item: OfferData) => ({
+            title: item.title,
+            companyName: item.companyName,
+         }));
+         const notDuplicateCities = [...new Set(cities)];
+         const notDuplcateTitles = [...new Set(searchOffers)];
+         setLocations(notDuplicateCities as string[]);
+         setJobTitles(notDuplcateTitles as JobOffers[]);
       } else if (!jobTitle && !localization) {
          setFilteredOffers(data);
       }
@@ -53,24 +71,19 @@ const OffersContainer = () => {
                offer.title.toLowerCase().startsWith(jobTitle.toLowerCase()),
             );
          setFilteredOffers(filteredDataByLocalizationAndTitle);
-      } else if (!jobTitle && !localization) {
-         setFilteredOffers(data);
-      }
-   };
-
-   useEffect(() => {
-      if (data) {
-         const cities = data.map((item: OfferData) => item.city);
-         const titles = data.map((item: OfferData) => ({
+         const cities = filteredDataByLocalizationAndTitle.map((item: OfferData) => item.city);
+         const searchOffers = filteredDataByLocalizationAndTitle.map((item: OfferData) => ({
             title: item.title,
             companyName: item.companyName,
          }));
          const notDuplicateCities = [...new Set(cities)];
-         const notDuplcateTitles = [...new Set(titles)];
+         const notDuplcateTitles = [...new Set(searchOffers)];
          setLocations(notDuplicateCities as string[]);
          setJobTitles(notDuplcateTitles as JobOffers[]);
+      } else if (!jobTitle && !localization) {
+         setFilteredOffers(data);
       }
-   }, [data]);
+   };
 
    useEffect(() => {
       filterData();

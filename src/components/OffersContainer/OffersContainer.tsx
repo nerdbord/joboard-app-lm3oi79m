@@ -6,11 +6,12 @@ import { useQuery } from 'react-query';
 import { getJobOffers } from '../../services/offersApi';
 import SearchBar from '../SearchBar/SearchBar';
 import { OfferData } from '../../interfaces/OfferData';
+import { JobOffers } from '../../interfaces/JobOffers';
 
 const OffersContainer = () => {
    let { data, error, isLoading } = useQuery('jobOffers', getJobOffers);
    const [locations, setLocations] = useState<string[]>([]);
-   const [jobTitles, setJobTitles] = useState<string[]>([]);
+   const [jobTitles, setJobTitles] = useState<JobOffers[]>([]);
    const [filteredOffers, setFilteredOffers] = useState<OfferData[]>([]);
    const [localization, setLocalization] = useState('');
    const [jobTitle, setJobTitle] = useState('');
@@ -60,17 +61,19 @@ const OffersContainer = () => {
    useEffect(() => {
       if (data) {
          const cities = data.map((item: OfferData) => item.city);
-         const titles = data.map((item: OfferData) => item.title);
+         const titles = data.map((item: OfferData) => ({
+            title: item.title,
+            companyName: item.companyName,
+         }));
          const notDuplicateCities = [...new Set(cities)];
          const notDuplcateTitles = [...new Set(titles)];
          setLocations(notDuplicateCities as string[]);
-         setJobTitles(notDuplcateTitles as string[]);
+         setJobTitles(notDuplcateTitles as JobOffers[]);
       }
    }, [data]);
 
    useEffect(() => {
       filterData();
-      console.log(filteredOffers);
    }, [data, localization, jobTitle]);
 
    const getOfferUI = () => {

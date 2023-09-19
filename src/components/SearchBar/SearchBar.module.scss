@@ -1,3 +1,67 @@
 .dropdownElement {
    cursor: pointer;
+   background-color: white;
+   width: 392px;
+   border: 1px solid #dadada;
+   height: 38px;
+   padding: 4px 15px 4px 15px;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   color: #545454;
+   font-size: 14px;
+}
+.dropdown {
+   position: relative;
+   border: 1px solid #dadada;
+   z-index: 1000;
+   width: 392px;
+}
+.allElements {
+   display: flex;
+   flex-direction: column;
+}
+.inner {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+.searchInput {
+   width: 392px;
+   height: 50px;
+   padding: 6.25px;
+   display: flex;
+   flex-direction: column;
+   border: 1px solid #9564d4;
+   outline: none;
+   background-color: white;
+   box-shadow: 0.5px 0.5px 0.5px 0.5px #9564d4;
+}
+.input {
+   height: 100%;
+   width: 100%;
+   border: none;
+   outline: none;
+   display: flex;
+   flex-direction: row;
+   text-align: start;
+   height: 40px;
+   font-size: 14px;
+   line-height: 14px;
+   font-weight: 500;
+   padding-left: 24px;
+}
+.inputIcon {
+   background: white;
+   border: none;
+   cursor: pointer;
+}
+.input_logic {
+   display: flex;
+   flex-direction: row;
+}
+.boldText {
+   font-weight: bold;
 }

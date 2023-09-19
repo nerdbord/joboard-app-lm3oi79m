@@ -4,6 +4,7 @@
    color: $gray-darkest;
    font-family: Poppins;
    font: $semibold16;
+   text-align: start;
 }
 .offers_container {
    display: inline-flex;
@@ -13,9 +14,18 @@
    background-color: $gray-lightest;
    width: 877px;
    height: 1081px;
+
    flex-shrink: 0;
    @include breakpoint(tablet) {
       display: flex;
       flex-direction: column;
    }
+}
+.search_container {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+}
+.container {
+   padding: 40px;
 }

@@ -1,5 +1,26 @@
 .dropdownElement {
    cursor: pointer;
+   background-color: white;
+   width: 392px;
+   border: 1px solid #dadada;
+   height: 38px;
+   padding: 4px 15px 4px 15px;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   color: #545454;
+   font-size: 14px;
+}
+.dropdown {
+   position: relative;
+   border: 1px solid #dadada;
+   z-index: 1000;
+   width: 392px;
+}
+.allElements {
+   display: flex;
+   flex-direction: column;
 }
 .inner {
    display: flex;
@@ -40,4 +61,7 @@
 .input_logic {
    display: flex;
    flex-direction: row;
+}
+.boldText {
+   font-weight: bold;
 }

@@ -60,7 +60,7 @@ const SearchBar: React.FC<{
                         placeholder="Search for"
                      />
                      <button className={styles.inputIcon}>
-                        <img src={searchLIcon} alt="" />
+                        <img src={searchLIcon} alt="Search icon" />
                      </button>
                   </div>
                </div>
@@ -104,7 +104,7 @@ const SearchBar: React.FC<{
                         placeholder="Search location"
                      />
                      <button className={styles.inputIcon}>
-                        <img src={placeLIcon} alt="" />
+                        <img src={placeLIcon} alt="Place icon" />
                      </button>
                   </div>
                </div>

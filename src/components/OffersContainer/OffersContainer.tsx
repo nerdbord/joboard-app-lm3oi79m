@@ -26,63 +26,33 @@ const OffersContainer = () => {
    const filterData = () => {
       if (!data) return [];
 
-      if (jobTitle && !localization) {
-         const filteredDataByTitle = data.filter((offer: OfferData) =>
+      let filteredData = data;
+
+      if (jobTitle) {
+         filteredData = filteredData.filter((offer: OfferData) =>
             offer.title.toLowerCase().startsWith(jobTitle.toLowerCase()),
          );
-         setFilteredOffers(filteredDataByTitle);
-         const cities = filteredDataByTitle.map((item: OfferData) => item.city);
-         const searchOffers = filteredDataByTitle.map((item: OfferData) => ({
-            title: item.title,
-            companyName: item.companyName,
-         }));
-         const notDuplicateCities = [...new Set(cities)];
-         const notDuplcateTitles = [...new Set(searchOffers)];
-         setLocations(notDuplicateCities as string[]);
-         setJobTitles(notDuplcateTitles as JobOffers[]);
-      } else if (!jobTitle && !localization) {
-         setFilteredOffers(data);
       }
 
-      if (localization && !jobTitle) {
-         const filteredDataByLocalization = data.filter((offer: OfferData) =>
+      if (localization) {
+         filteredData = filteredData.filter((offer: OfferData) =>
             offer.city.toLowerCase().startsWith(localization.toLowerCase()),
          );
-         setFilteredOffers(filteredDataByLocalization);
-         const cities = filteredDataByLocalization.map((item: OfferData) => item.city);
-         const searchOffers = filteredDataByLocalization.map((item: OfferData) => ({
-            title: item.title,
-            companyName: item.companyName,
-         }));
-         const notDuplicateCities = [...new Set(cities)];
-         const notDuplcateTitles = [...new Set(searchOffers)];
-         setLocations(notDuplicateCities as string[]);
-         setJobTitles(notDuplcateTitles as JobOffers[]);
-      } else if (!jobTitle && !localization) {
-         setFilteredOffers(data);
       }
 
-      if (localization && jobTitle) {
-         const filteredDataByLocalizationAndTitle = data
-            .filter((offer: OfferData) =>
-               offer.city.toLowerCase().startsWith(localization.toLowerCase()),
-            )
-            .filter((offer: OfferData) =>
-               offer.title.toLowerCase().startsWith(jobTitle.toLowerCase()),
-            );
-         setFilteredOffers(filteredDataByLocalizationAndTitle);
-         const cities = filteredDataByLocalizationAndTitle.map((item: OfferData) => item.city);
-         const searchOffers = filteredDataByLocalizationAndTitle.map((item: OfferData) => ({
-            title: item.title,
-            companyName: item.companyName,
-         }));
-         const notDuplicateCities = [...new Set(cities)];
-         const notDuplcateTitles = [...new Set(searchOffers)];
-         setLocations(notDuplicateCities as string[]);
-         setJobTitles(notDuplcateTitles as JobOffers[]);
-      } else if (!jobTitle && !localization) {
-         setFilteredOffers(data);
-      }
+      setFilteredOffers(filteredData);
+
+      const cities = filteredData.map((item: OfferData) => item.city);
+      const searchOffers = filteredData.map((item: OfferData) => ({
+         title: item.title,
+         companyName: item.companyName,
+      }));
+
+      const notDuplicateCities = [...new Set(cities)];
+      const notDuplicateTitles = [...new Set(searchOffers)];
+
+      setLocations(notDuplicateCities as string[]);
+      setJobTitles(notDuplicateTitles as JobOffers[]);
    };
 
    useEffect(() => {
@@ -93,32 +63,32 @@ const OffersContainer = () => {
       if (isLoading) {
          return <div>Loading...</div>;
       }
+
       if (error) {
          return <div>Error</div>;
       }
-      if (data) {
-         return (
-            <div className={styles.container}>
-               <SearchBar
-                  localization={localization}
-                  setLocalization={setLocalization}
-                  jobTitle={jobTitle}
-                  setJobTitle={setJobTitle}
-                  onChangeLocation={onChangeLocation}
-                  onChangeJobTitle={onChangeJobTitle}
-                  locations={locations}
-                  jobTitles={jobTitles}
-               />
-               <span className={styles.offers_counter}>{filteredOffers.length} offers found</span>
 
-               {filteredOffers.length != 0 ? (
-                  <OffersList offers={filteredOffers} />
-               ) : (
-                  <div>No results found</div>
-               )}
-            </div>
-         );
-      }
+      return (
+         <div className={styles.container}>
+            <SearchBar
+               localization={localization}
+               setLocalization={setLocalization}
+               jobTitle={jobTitle}
+               setJobTitle={setJobTitle}
+               onChangeLocation={onChangeLocation}
+               onChangeJobTitle={onChangeJobTitle}
+               locations={locations}
+               jobTitles={jobTitles}
+            />
+            <span className={styles.offers_counter}>{filteredOffers.length} offers found</span>
+
+            {filteredOffers.length !== 0 ? (
+               <OffersList offers={filteredOffers} />
+            ) : (
+               <div>No results found</div>
+            )}
+         </div>
+      );
    };
 
    return <div className={styles.offers_container}>{getOfferUI()}</div>;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './OffersContainer.module.scss';
 import OffersList from '../OffersList/OffersList';
 
@@ -9,38 +9,33 @@ import { OfferData } from '../../interfaces/OfferData';
 import { JobOffers } from '../../interfaces/JobOffers';
 
 const OffersContainer = () => {
-   let { data, error, isLoading } = useQuery('jobOffers', getJobOffers);
-   const [locations, setLocations] = useState<string[]>([]);
-   const [jobTitles, setJobTitles] = useState<JobOffers[]>([]);
-   const [filteredOffers, setFilteredOffers] = useState<OfferData[]>([]);
    const [localization, setLocalization] = useState('');
    const [jobTitle, setJobTitle] = useState('');
 
+   const [locations, setLocations] = useState<string[]>([]);
+   const [jobTitles, setJobTitles] = useState<JobOffers[]>([]);
+   const [data, setData] = useState<OfferData[]>([]); // Inicjalizacja jako pusta tablica
+
    const onChangeLocation = (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault();
       setLocalization(event.target.value);
    };
    const onChangeJobTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault();
       setJobTitle(event.target.value);
    };
 
-   const filterData = () => {
-      if (!data) return [];
-
-      let filteredData = data;
-
-      if (jobTitle) {
-         filteredData = filteredData.filter((offer: OfferData) =>
-            offer.title.toLowerCase().startsWith(jobTitle.toLowerCase()),
-         );
-      }
-
-      if (localization) {
-         filteredData = filteredData.filter((offer: OfferData) =>
-            offer.city.toLowerCase().startsWith(localization.toLowerCase()),
-         );
-      }
-
-      setFilteredOffers(filteredData);
+   const getFilteredJobOffers = async () => {
+      const response = await getJobOffers();
+      const filteredData = response.filter((offer: OfferData) => {
+         if (jobTitle && !offer.title.toLowerCase().startsWith(jobTitle.toLowerCase())) {
+            return false;
+         }
+         if (localization && !offer.city.toLowerCase().startsWith(localization.toLowerCase())) {
+            return false;
+         }
+         return true;
+      });
 
       const cities = filteredData.map((item: OfferData) => item.city);
       const searchOffers = filteredData.map((item: OfferData) => ({
@@ -53,11 +48,14 @@ const OffersContainer = () => {
 
       setLocations(notDuplicateCities as string[]);
       setJobTitles(notDuplicateTitles as JobOffers[]);
-   };
+      setData(filteredData); // Ustaw dane po filtrowaniu
 
-   useEffect(() => {
-      filterData();
-   }, [data, localization, jobTitle]);
+      return filteredData;
+   };
+   const { error, isLoading } = useQuery(
+      ['jobOffers', localization, jobTitle],
+      getFilteredJobOffers,
+   );
 
    const getOfferUI = () => {
       if (isLoading) {
@@ -68,7 +66,11 @@ const OffersContainer = () => {
          return <div>Error</div>;
       }
 
-      return (
+      return <>{data.length !== 0 ? <OffersList offers={data} /> : <div>No results found</div>}</>;
+   };
+
+   return (
+      <div className={styles.offers_container}>
          <div className={styles.container}>
             <SearchBar
                localization={localization}
@@ -80,18 +82,12 @@ const OffersContainer = () => {
                locations={locations}
                jobTitles={jobTitles}
             />
-            <span className={styles.offers_counter}>{filteredOffers.length} offers found</span>
+            <span className={styles.offers_counter}>{data.length} offers found</span>
 
-            {filteredOffers.length !== 0 ? (
-               <OffersList offers={filteredOffers} />
-            ) : (
-               <div>No results found</div>
-            )}
+            {getOfferUI()}
          </div>
-      );
-   };
-
-   return <div className={styles.offers_container}>{getOfferUI()}</div>;
+      </div>
+   );
 };
 
 export default OffersContainer;

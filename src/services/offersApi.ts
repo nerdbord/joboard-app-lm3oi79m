@@ -9,6 +9,6 @@ export const getJobOffers = async (params?: any): Promise<any> => {
    if (!response.ok) {
       throw new Error('Problem with fetching job offers');
    }
-   const data = await response.json(); // Pobierz dane JSON z odpowiedzi
+   const data = await response.json();
    return data;
 };

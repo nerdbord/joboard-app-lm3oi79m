@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './OffersContainer.module.scss';
 import OffersList from '../OffersList/OffersList';
 
@@ -7,14 +7,16 @@ import { getJobOffers } from '../../services/offersApi';
 import SearchBar from '../SearchBar/SearchBar';
 import { OfferData } from '../../interfaces/OfferData';
 import { JobOffers } from '../../interfaces/JobOffers';
-
-const OffersContainer = () => {
+interface OffersContainerProps {
+   jobTypes: string[];
+}
+const OffersContainer = ({ jobTypes }: OffersContainerProps) => {
    const [localization, setLocalization] = useState('');
    const [jobTitle, setJobTitle] = useState('');
 
    const [locations, setLocations] = useState<string[]>([]);
    const [jobTitles, setJobTitles] = useState<JobOffers[]>([]);
-   const [data, setData] = useState<OfferData[]>([]); // Inicjalizacja jako pusta tablica
+   const [data, setData] = useState<OfferData[]>([]);
 
    const onChangeLocation = (event: React.ChangeEvent<HTMLInputElement>) => {
       event.preventDefault();
@@ -34,6 +36,10 @@ const OffersContainer = () => {
          if (localization && !offer.city.toLowerCase().startsWith(localization.toLowerCase())) {
             return false;
          }
+         if (jobTypes.length > 0 && !jobTypes.some((jobType) => offer.jobType.includes(jobType))) {
+            return false;
+         }
+
          return true;
       });
 
@@ -48,10 +54,13 @@ const OffersContainer = () => {
 
       setLocations(notDuplicateCities as string[]);
       setJobTitles(notDuplicateTitles as JobOffers[]);
-      setData(filteredData); // Ustaw dane po filtrowaniu
+      setData(filteredData);
 
       return filteredData;
    };
+   useEffect(() => {
+      getFilteredJobOffers();
+   }, [jobTypes]);
    const { error, isLoading } = useQuery(
       ['jobOffers', localization, jobTitle],
       getFilteredJobOffers,

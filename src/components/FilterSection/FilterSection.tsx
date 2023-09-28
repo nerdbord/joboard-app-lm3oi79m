@@ -4,16 +4,25 @@ import { Checkbox } from '../Checkbox/Checkbox';
 
 interface FilterSectionProps {
    title: string;
+   options: string[];
+   jobTypes: string[];
+
+   setJobTypes?: any;
 }
 
-export const FilterSection = ({ title }: FilterSectionProps) => {
+export const FilterSection = ({ title, options, jobTypes, setJobTypes }: FilterSectionProps) => {
    return (
       <div className={styles.filter_section_wrapper}>
          <p className={styles.filter_section_title}>{title}</p>
          <div className={styles.filter_section_checkbox}>
-            <Checkbox label="text1" onChange={() => console.log('checked1')} />
-            <Checkbox label="text2" onChange={() => console.log('checked2')} />
-            <Checkbox label="text2" onChange={() => console.log('checked3')} />
+            {options.map((option) => (
+               <Checkbox
+                  key={option}
+                  label={option}
+                  jobTypes={jobTypes}
+                  setJobTypes={setJobTypes}
+               />
+            ))}
          </div>
       </div>
    );

@@ -2,20 +2,28 @@ import React from 'react';
 import styles from './FiltersContainer.module.scss';
 import { FilterSection } from '../FilterSection/FilterSection';
 import { FilterSalary } from '../FilterSalary/FilterSalary';
+
 interface FilterOptions {
    'Job type': string[];
    Seniority: string[];
    Location: string[];
 }
-const FiltersContainer = () => {
-   const filterSections: (keyof FilterOptions)[] = ['Job type', 'Seniority', 'Location'];
+
+interface FilterContainerProps {
+   jobTypes: string[];
+   setJobTypes: (newValue: string[]) => void;
+}
+
+const FiltersContainer = ({ setJobTypes, jobTypes }: FilterContainerProps) => {
    const filterOptions: FilterOptions = {
       'Job type': ['Full-time', 'Part-time', 'Freelance', 'Contract'],
       Seniority: ['Lead', 'Expert', 'Senior', 'Mid/Regular', 'Junior', 'Intern'],
       Location: ['Remote', 'Part-remote', 'On-site'],
-      // Tutaj można dodać inne opcje dotyczące wynagrodzenia
    };
    const salary = 14000;
+
+   const jobTypesFiltered = jobTypes.filter((type) => filterOptions['Job type'].includes(type));
+
    return (
       <div className={styles.container}>
          <header className={styles.header}>
@@ -23,13 +31,31 @@ const FiltersContainer = () => {
             <button className={styles.clear_button}>Clear filters</button>
          </header>
          <section>
-            {filterSections.map((section) => (
-               <FilterSection key={section} title={section} options={filterOptions[section]} />
-            ))}
+            <FilterSection
+               key="Job type"
+               title="Job type"
+               jobTypes={jobTypesFiltered}
+               options={filterOptions['Job type']}
+               setJobTypes={setJobTypes}
+            />
+
+            <FilterSection
+               key="Seniority"
+               title="Seniority"
+               jobTypes={jobTypes}
+               options={filterOptions['Seniority']}
+            />
+            <FilterSection
+               key="Location"
+               title="Location"
+               jobTypes={jobTypes}
+               options={filterOptions['Location']}
+            />
 
             <FilterSalary />
          </section>
       </div>
    );
 };
+
 export default FiltersContainer;

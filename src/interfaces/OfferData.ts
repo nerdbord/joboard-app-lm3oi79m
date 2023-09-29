@@ -10,6 +10,7 @@ export interface OfferData {
    offerUrl: any;
    salaryFrom: number;
    salaryTo: number;
+   workLocation: string;
    seniority: string;
    technologies: string[];
    updatedAt: string;

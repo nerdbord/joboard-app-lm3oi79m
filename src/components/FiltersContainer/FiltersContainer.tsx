@@ -12,9 +12,16 @@ interface FilterOptions {
 interface FilterContainerProps {
    jobTypes: string[];
    setJobTypes: (newValue: string[]) => void;
+   locations: string[];
+   setLocations: (newValue: string[]) => void;
 }
 
-const FiltersContainer = ({ setJobTypes, jobTypes }: FilterContainerProps) => {
+const FiltersContainer = ({
+   setJobTypes,
+   jobTypes,
+   locations,
+   setLocations,
+}: FilterContainerProps) => {
    const filterOptions: FilterOptions = {
       'Job type': ['Full-time', 'Part-time', 'Freelance', 'Contract'],
       Seniority: ['Lead', 'Expert', 'Senior', 'Mid/Regular', 'Junior', 'Intern'],
@@ -35,8 +42,8 @@ const FiltersContainer = ({ setJobTypes, jobTypes }: FilterContainerProps) => {
                key="Job type"
                title="Job type"
                jobTypes={jobTypesFiltered}
-               options={filterOptions['Job type']}
                setJobTypes={setJobTypes}
+               options={filterOptions['Job type']}
             />
 
             <FilterSection
@@ -48,7 +55,8 @@ const FiltersContainer = ({ setJobTypes, jobTypes }: FilterContainerProps) => {
             <FilterSection
                key="Location"
                title="Location"
-               jobTypes={jobTypes}
+               locations={locations}
+               setLocations={setLocations}
                options={filterOptions['Location']}
             />
 

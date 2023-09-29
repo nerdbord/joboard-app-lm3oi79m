@@ -9,12 +9,13 @@ import { OfferData } from '../../interfaces/OfferData';
 import { JobOffers } from '../../interfaces/JobOffers';
 interface OffersContainerProps {
    jobTypes: string[];
+   locations: string[];
 }
-const OffersContainer = ({ jobTypes }: OffersContainerProps) => {
+const OffersContainer = ({ jobTypes, locations }: OffersContainerProps) => {
    const [localization, setLocalization] = useState('');
    const [jobTitle, setJobTitle] = useState('');
 
-   const [locations, setLocations] = useState<string[]>([]);
+   const [searchLocations, setSearchLocations] = useState<string[]>([]);
    const [jobTitles, setJobTitles] = useState<JobOffers[]>([]);
    const [data, setData] = useState<OfferData[]>([]);
 
@@ -39,6 +40,12 @@ const OffersContainer = ({ jobTypes }: OffersContainerProps) => {
          if (jobTypes.length > 0 && !jobTypes.some((jobType) => offer.jobType.includes(jobType))) {
             return false;
          }
+         if (
+            locations.length > 0 &&
+            !locations.some((location) => offer.workLocation.includes(location))
+         ) {
+            return false;
+         }
 
          return true;
       });
@@ -52,7 +59,7 @@ const OffersContainer = ({ jobTypes }: OffersContainerProps) => {
       const notDuplicateCities = [...new Set(cities)];
       const notDuplicateTitles = [...new Set(searchOffers)];
 
-      setLocations(notDuplicateCities as string[]);
+      setSearchLocations(notDuplicateCities as string[]);
       setJobTitles(notDuplicateTitles as JobOffers[]);
       setData(filteredData);
 
@@ -60,7 +67,8 @@ const OffersContainer = ({ jobTypes }: OffersContainerProps) => {
    };
    useEffect(() => {
       getFilteredJobOffers();
-   }, [jobTypes]);
+   }, [jobTypes, locations]);
+
    const { error, isLoading } = useQuery(
       ['jobOffers', localization, jobTitle],
       getFilteredJobOffers,
@@ -88,7 +96,7 @@ const OffersContainer = ({ jobTypes }: OffersContainerProps) => {
                setJobTitle={setJobTitle}
                onChangeLocation={onChangeLocation}
                onChangeJobTitle={onChangeJobTitle}
-               locations={locations}
+               locations={searchLocations}
                jobTitles={jobTitles}
             />
             <span className={styles.offers_counter}>{data.length} offers found</span>

@@ -5,19 +5,33 @@ import { ReactComponent as CheckedIcon } from '@icons/CheckedIcon.svg';
 
 export interface CheckboxProps {
    setJobTypes?: any;
-   jobTypes: string[];
+   jobTypes?: string[];
    label: string;
+   locations?: string[];
+   setLocations?: any;
 }
-export const Checkbox = ({ label, jobTypes, setJobTypes }: CheckboxProps) => {
+export const Checkbox = ({
+   label,
+   jobTypes,
+   setJobTypes,
+   locations,
+   setLocations,
+}: CheckboxProps) => {
    const [isChecked, setIsChecked] = useState<boolean>(false);
 
    function handleClick() {
       setIsChecked(!isChecked);
-      if (setJobTypes) {
+      if (setJobTypes && jobTypes) {
          if (jobTypes.includes(label)) {
             setJobTypes(jobTypes.filter((item) => item !== label));
          } else {
             setJobTypes([...jobTypes, label]);
+         }
+      } else if (locations && setLocations) {
+         if (locations.includes(label)) {
+            setLocations(locations?.filter((item) => item !== label));
+         } else {
+            setLocations([...locations, label]);
          }
       } else {
          return;

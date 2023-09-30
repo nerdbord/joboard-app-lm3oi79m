@@ -11,8 +11,17 @@ interface OffersContainerProps {
    jobTypes: string[];
    locations: string[];
    seniority: string[];
+   salaryLevels: { min: number; max: number };
+   setSalaryLevels: React.Dispatch<{ min: number; max: number }>;
 }
-const OffersContainer = ({ jobTypes, locations, seniority }: OffersContainerProps) => {
+
+const OffersContainer = ({
+   jobTypes,
+   locations,
+   salaryLevels,
+   setSalaryLevels,
+   seniority,
+}: OffersContainerProps) => {
    const [localization, setLocalization] = useState('');
    const [jobTitle, setJobTitle] = useState('');
    const [seniorities, setSeniorities] = useState<string[]>([]);
@@ -31,7 +40,10 @@ const OffersContainer = ({ jobTypes, locations, seniority }: OffersContainerProp
    };
 
    const getFilteredJobOffers = async () => {
+      const salariesFrom: number[] = [];
+      const salariesTo: number[] = [];
       const response = await getJobOffers();
+
       const filteredData = response.filter((offer: OfferData) => {
          const titleMatch =
             !jobTitle || offer.title.toLowerCase().startsWith(jobTitle.toLowerCase());
@@ -64,8 +76,15 @@ const OffersContainer = ({ jobTypes, locations, seniority }: OffersContainerProp
       setJobTitles(notDuplicateTitles as JobOffers[]);
       setData(filteredData);
 
+      filteredData.map((item: any) => {
+         salariesFrom.push(item.salaryFrom);
+         salariesTo.push(item.salaryTo);
+         setSalaryLevels({ min: Math.min(...salariesFrom), max: Math.max(...salariesTo) });
+      });
+
       return filteredData;
    };
+
    useEffect(() => {
       getFilteredJobOffers();
    }, [jobTypes, locations, seniority]);

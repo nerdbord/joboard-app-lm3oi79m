@@ -16,6 +16,10 @@ interface FilterContainerProps {
    setLocations: (newValue: string[]) => void;
    seniority: string[];
    setSeniority: (newValue: string[]) => void;
+   sliderValue: number;
+   setSliderValue: (newValue: number) => void;
+   salaryLevels: { min: number; max: number };
+   setSalaryLevels: React.Dispatch<{ min: number; max: number }>;
 }
 
 const FiltersContainer = ({
@@ -25,13 +29,16 @@ const FiltersContainer = ({
    setLocations,
    seniority,
    setSeniority,
+   sliderValue,
+   setSliderValue,
+   salaryLevels,
+   setSalaryLevels,
 }: FilterContainerProps) => {
    const filterOptions: FilterOptions = {
       'Job type': ['Full-time', 'Part-time', 'Freelance', 'Contract'],
       Seniority: ['Lead', 'Expert', 'Senior', 'Mid/Regular', 'Junior', 'Intern'],
       Location: ['Remote', 'Part-remote', 'On-site'],
    };
-   const salary = 14000;
 
    const jobTypesFiltered = jobTypes.filter((type) => filterOptions['Job type'].includes(type));
 
@@ -65,7 +72,13 @@ const FiltersContainer = ({
                options={filterOptions['Location']}
             />
 
-            <FilterSalary />
+            <FilterSalary
+               title="Salary(min.)"
+               sliderValue={sliderValue}
+               setSliderValue={setSliderValue}
+               salaryLevels={salaryLevels}
+               setSalaryLevels={setSalaryLevels}
+            />
          </section>
       </div>
    );

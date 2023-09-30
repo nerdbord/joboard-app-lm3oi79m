@@ -5,10 +5,17 @@ import FiltersContainer from './components/FiltersContainer/FiltersContainer';
 import OffersContainer from './components/OffersContainer/OffersContainer';
 import { QueryClient, QueryClientProvider } from 'react-query';
 const queryClient = new QueryClient();
+interface SalaryLevelsData {
+   min: number;
+   max: number;
+}
 function App() {
    const [jobTypes, setJobTypes] = useState<string[] | any[]>([]);
    const [seniority, setSeniority] = useState<string[] | any[]>([]);
    const [locations, setLocations] = useState<string[] | any[]>([]);
+   const [sliderValue, setSliderValue] = useState<number>(10000);
+   const [salaryLevels, setSalaryLevels] = useState<SalaryLevelsData>({ min: 1, max: 20000 });
+
    return (
       <QueryClientProvider client={queryClient}>
          <Container>
@@ -17,10 +24,20 @@ function App() {
                setJobTypes={setJobTypes}
                locations={locations}
                setLocations={setLocations}
+               sliderValue={sliderValue}
+               setSliderValue={setSliderValue}
+               salaryLevels={salaryLevels}
+               setSalaryLevels={setSalaryLevels}
                seniority={seniority}
                setSeniority={setSeniority}
             />
-            <OffersContainer jobTypes={jobTypes} locations={locations} seniority={seniority} />
+            <OffersContainer
+               jobTypes={jobTypes}
+               locations={locations}
+               salaryLevels={salaryLevels}
+               setSalaryLevels={setSalaryLevels}
+               seniority={seniority}
+            />
          </Container>
       </QueryClientProvider>
    );

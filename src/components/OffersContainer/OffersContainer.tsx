@@ -10,10 +10,12 @@ import { JobOffers } from '../../interfaces/JobOffers';
 interface OffersContainerProps {
    jobTypes: string[];
    locations: string[];
+   seniority: string[];
 }
-const OffersContainer = ({ jobTypes, locations }: OffersContainerProps) => {
+const OffersContainer = ({ jobTypes, locations, seniority }: OffersContainerProps) => {
    const [localization, setLocalization] = useState('');
    const [jobTitle, setJobTitle] = useState('');
+   const [seniorities, setSeniorities] = useState<string[]>([]);
 
    const [searchLocations, setSearchLocations] = useState<string[]>([]);
    const [jobTitles, setJobTitles] = useState<JobOffers[]>([]);
@@ -31,23 +33,19 @@ const OffersContainer = ({ jobTypes, locations }: OffersContainerProps) => {
    const getFilteredJobOffers = async () => {
       const response = await getJobOffers();
       const filteredData = response.filter((offer: OfferData) => {
-         if (jobTitle && !offer.title.toLowerCase().startsWith(jobTitle.toLowerCase())) {
-            return false;
-         }
-         if (localization && !offer.city.toLowerCase().startsWith(localization.toLowerCase())) {
-            return false;
-         }
-         if (jobTypes.length > 0 && !jobTypes.some((jobType) => offer.jobType.includes(jobType))) {
-            return false;
-         }
-         if (
-            locations.length > 0 &&
-            !locations.some((location) => offer.workLocation.includes(location))
-         ) {
-            return false;
-         }
+         const titleMatch =
+            !jobTitle || offer.title.toLowerCase().startsWith(jobTitle.toLowerCase());
+         const localizationMatch =
+            !localization || offer.city.toLowerCase().startsWith(localization.toLowerCase());
+         const jobTypeMatch =
+            jobTypes.length === 0 || jobTypes.some((jobType) => offer.jobType.includes(jobType));
+         const locationMatch =
+            locations.length === 0 ||
+            locations.some((location) => offer.workLocation.includes(location));
+         const seniorityMatch =
+            seniority.length === 0 || seniority.some((rank) => offer.seniority.includes(rank));
 
-         return true;
+         return titleMatch && localizationMatch && jobTypeMatch && locationMatch && seniorityMatch;
       });
 
       const cities = filteredData.map((item: OfferData) => item.city);
@@ -55,11 +53,14 @@ const OffersContainer = ({ jobTypes, locations }: OffersContainerProps) => {
          title: item.title,
          companyName: item.companyName,
       }));
+      const ranks = filteredData.map((item: OfferData) => item.seniority);
 
       const notDuplicateCities = [...new Set(cities)];
       const notDuplicateTitles = [...new Set(searchOffers)];
+      const notDuplicateSeniorities = [...new Set(ranks)];
 
       setSearchLocations(notDuplicateCities as string[]);
+      setSeniorities(notDuplicateSeniorities as string[]);
       setJobTitles(notDuplicateTitles as JobOffers[]);
       setData(filteredData);
 
@@ -67,10 +68,10 @@ const OffersContainer = ({ jobTypes, locations }: OffersContainerProps) => {
    };
    useEffect(() => {
       getFilteredJobOffers();
-   }, [jobTypes, locations]);
+   }, [jobTypes, locations, seniority]);
 
    const { error, isLoading } = useQuery(
-      ['jobOffers', localization, jobTitle],
+      ['jobOffers', localization, jobTitle, seniorities],
       getFilteredJobOffers,
    );
 

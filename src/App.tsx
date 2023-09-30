@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 const queryClient = new QueryClient();
 function App() {
    const [jobTypes, setJobTypes] = useState<string[] | any[]>([]);
+   const [seniority, setSeniority] = useState<string[] | any[]>([]);
    const [locations, setLocations] = useState<string[] | any[]>([]);
    return (
       <QueryClientProvider client={queryClient}>
@@ -16,8 +17,10 @@ function App() {
                setJobTypes={setJobTypes}
                locations={locations}
                setLocations={setLocations}
+               seniority={seniority}
+               setSeniority={setSeniority}
             />
-            <OffersContainer jobTypes={jobTypes} locations={locations} />
+            <OffersContainer jobTypes={jobTypes} locations={locations} seniority={seniority} />
          </Container>
       </QueryClientProvider>
    );

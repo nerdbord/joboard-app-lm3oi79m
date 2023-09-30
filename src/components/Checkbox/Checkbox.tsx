@@ -9,6 +9,8 @@ export interface CheckboxProps {
    label: string;
    locations?: string[];
    setLocations?: any;
+   seniority?: string[];
+   setSeniority?: any;
 }
 export const Checkbox = ({
    label,
@@ -16,25 +18,39 @@ export const Checkbox = ({
    setJobTypes,
    locations,
    setLocations,
+   seniority,
+   setSeniority,
 }: CheckboxProps) => {
    const [isChecked, setIsChecked] = useState<boolean>(false);
 
    function handleClick() {
       setIsChecked(!isChecked);
-      if (setJobTypes && jobTypes) {
-         if (jobTypes.includes(label)) {
-            setJobTypes(jobTypes.filter((item) => item !== label));
-         } else {
-            setJobTypes([...jobTypes, label]);
+
+      const stateMap: Record<
+         string,
+         {
+            state: string[] | undefined;
+            setState: React.Dispatch<React.SetStateAction<string[]>> | undefined;
          }
-      } else if (locations && setLocations) {
-         if (locations.includes(label)) {
-            setLocations(locations?.filter((item) => item !== label));
-         } else {
-            setLocations([...locations, label]);
+      > = {
+         jobTypes: { state: jobTypes, setState: setJobTypes },
+         locations: { state: locations, setState: setLocations },
+         seniority: { state: seniority, setState: setSeniority },
+      };
+
+      for (const key in stateMap) {
+         if (stateMap.hasOwnProperty(key)) {
+            const { state, setState } = stateMap[key];
+
+            if (state && setState) {
+               if (state.includes(label)) {
+                  setState(state.filter((item) => item !== label));
+               } else {
+                  setState([...state, label]);
+               }
+               return; //koniec cykla
+            }
          }
-      } else {
-         return;
       }
    }
 

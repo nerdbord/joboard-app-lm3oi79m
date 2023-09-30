@@ -6,9 +6,11 @@ interface FilterSectionProps {
    title: string;
    options: string[];
    jobTypes?: string[];
+   seniority?: string[];
    locations?: string[];
    setLocations?: any;
    setJobTypes?: any;
+   setSeniority?: any;
 }
 
 export const FilterSection = ({
@@ -18,6 +20,8 @@ export const FilterSection = ({
    setJobTypes,
    locations,
    setLocations,
+   seniority,
+   setSeniority,
 }: FilterSectionProps) => {
    return (
       <div className={styles.filter_section_wrapper}>
@@ -31,6 +35,8 @@ export const FilterSection = ({
                   setJobTypes={setJobTypes}
                   locations={locations}
                   setLocations={setLocations}
+                  seniority={seniority}
+                  setSeniority={setSeniority}
                />
             ))}
          </div>

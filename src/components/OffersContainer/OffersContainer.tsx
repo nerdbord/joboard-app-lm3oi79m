@@ -7,12 +7,11 @@ import { getJobOffers } from '../../services/offersApi';
 import SearchBar from '../SearchBar/SearchBar';
 import { OfferData } from '../../interfaces/OfferData';
 import { JobOffers } from '../../interfaces/JobOffers';
-interface OffersContainerProps {
-   jobTypes: string[];
-   locations: string[];
-   seniority: string[];
-}
-const OffersContainer = ({ jobTypes, locations, seniority }: OffersContainerProps) => {
+import { DataContext } from '../../context/DataContext';
+import { useContext } from 'react';
+
+const OffersContainer = () => {
+   const { jobTypes, locations, seniority } = useContext(DataContext);
    const [localization, setLocalization] = useState('');
    const [jobTitle, setJobTitle] = useState('');
    const [seniorities, setSeniorities] = useState<string[]>([]);
@@ -30,6 +29,13 @@ const OffersContainer = ({ jobTypes, locations, seniority }: OffersContainerProp
       setJobTitle(event.target.value);
    };
 
+   function handleClearFilters() {
+      setJobTitle('');
+      setLocalization('');
+      setSeniorities([]);
+      getFilteredJobOffers();
+   }
+
    const getFilteredJobOffers = async () => {
       const response = await getJobOffers();
       const filteredData = response.filter((offer: OfferData) => {
@@ -38,12 +44,14 @@ const OffersContainer = ({ jobTypes, locations, seniority }: OffersContainerProp
          const localizationMatch =
             !localization || offer.city.toLowerCase().startsWith(localization.toLowerCase());
          const jobTypeMatch =
-            jobTypes.length === 0 || jobTypes.some((jobType) => offer.jobType.includes(jobType));
+            jobTypes.length === 0 ||
+            jobTypes.some((jobType: string) => offer.jobType.includes(jobType));
          const locationMatch =
             locations.length === 0 ||
-            locations.some((location) => offer.workLocation.includes(location));
+            locations.some((location: string) => offer.workLocation.includes(location));
          const seniorityMatch =
-            seniority.length === 0 || seniority.some((rank) => offer.seniority.includes(rank));
+            seniority.length === 0 ||
+            seniority.some((rank: string) => offer.seniority.includes(rank));
 
          return titleMatch && localizationMatch && jobTypeMatch && locationMatch && seniorityMatch;
       });

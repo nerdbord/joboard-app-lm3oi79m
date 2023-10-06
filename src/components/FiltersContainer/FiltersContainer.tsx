@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './FiltersContainer.module.scss';
 import { FilterSection } from '../FilterSection/FilterSection';
 import { FilterSalary } from '../FilterSalary/FilterSalary';
+import { useContext } from 'react';
+import { DataContext } from '../../context/DataContext';
 
 interface FilterOptions {
    'Job type': string[];
@@ -9,23 +11,9 @@ interface FilterOptions {
    Location: string[];
 }
 
-interface FilterContainerProps {
-   jobTypes: string[];
-   setJobTypes: (newValue: string[]) => void;
-   locations: string[];
-   setLocations: (newValue: string[]) => void;
-   seniority: string[];
-   setSeniority: (newValue: string[]) => void;
-}
-
-const FiltersContainer = ({
-   setJobTypes,
-   jobTypes,
-   locations,
-   setLocations,
-   seniority,
-   setSeniority,
-}: FilterContainerProps) => {
+const FiltersContainer = () => {
+   const { jobTypes, locations, setLocations, seniority, setSeniority, setJobTypes } =
+      useContext(DataContext);
    const filterOptions: FilterOptions = {
       'Job type': ['Full-time', 'Part-time', 'Freelance', 'Contract'],
       Seniority: ['Lead', 'Expert', 'Senior', 'Mid/Regular', 'Junior', 'Intern'],
@@ -33,13 +21,22 @@ const FiltersContainer = ({
    };
    const salary = 14000;
 
-   const jobTypesFiltered = jobTypes.filter((type) => filterOptions['Job type'].includes(type));
+   const jobTypesFiltered = jobTypes.filter((type: string) =>
+      filterOptions['Job type'].includes(type),
+   );
 
+   const handleClearFilter = () => {
+      setSeniority([]);
+      setJobTypes([]), setLocations([]);
+      // onChange (isChecked ? )
+   };
    return (
       <div className={styles.container}>
          <header className={styles.header}>
             <p className={styles.header_title}>Filter offers</p>
-            <button className={styles.clear_button}>Clear filters</button>
+            <button className={styles.clear_button} onClick={handleClearFilter}>
+               Clear filters
+            </button>
          </header>
          <section>
             <FilterSection

@@ -11,6 +11,7 @@ interface OffersContainerProps {
    jobTypes: string[];
    locations: string[];
    seniority: string[];
+   sliderValue: number;
    salaryLevels: { min: number; max: number };
    setSalaryLevels: React.Dispatch<{ min: number; max: number }>;
 }
@@ -18,6 +19,7 @@ interface OffersContainerProps {
 const OffersContainer = ({
    jobTypes,
    locations,
+   sliderValue,
    salaryLevels,
    setSalaryLevels,
    seniority,
@@ -56,8 +58,16 @@ const OffersContainer = ({
             locations.some((location) => offer.workLocation.includes(location));
          const seniorityMatch =
             seniority.length === 0 || seniority.some((rank) => offer.seniority.includes(rank));
+         const slider = sliderValue < offer.salaryFrom;
 
-         return titleMatch && localizationMatch && jobTypeMatch && locationMatch && seniorityMatch;
+         return (
+            titleMatch &&
+            localizationMatch &&
+            jobTypeMatch &&
+            locationMatch &&
+            seniorityMatch &&
+            slider
+         );
       });
 
       const cities = filteredData.map((item: OfferData) => item.city);

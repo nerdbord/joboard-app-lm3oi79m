@@ -16,6 +16,11 @@ function App() {
    const [sliderValue, setSliderValue] = useState<number>(10000);
    const [salaryLevels, setSalaryLevels] = useState<SalaryLevelsData>({ min: 1, max: 20000 });
 
+   useEffect(() => {
+      console.log(sliderValue);
+      console.log(salaryLevels.min, salaryLevels.max);
+   }, [sliderValue]);
+
    return (
       <QueryClientProvider client={queryClient}>
          <Container>
@@ -37,6 +42,7 @@ function App() {
                salaryLevels={salaryLevels}
                setSalaryLevels={setSalaryLevels}
                seniority={seniority}
+               sliderValue={sliderValue}
             />
          </Container>
       </QueryClientProvider>

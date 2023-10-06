@@ -22,8 +22,8 @@ export const Checkbox = ({
    setSeniority,
 }: CheckboxProps) => {
    const [isChecked, setIsChecked] = useState<boolean>(false);
-
    function handleClick() {
+      // handleclick ma zwracać tylko stan isChecked
       setIsChecked(!isChecked);
 
       const stateMap: Record<
@@ -48,6 +48,7 @@ export const Checkbox = ({
                } else {
                   setState([...state, label]);
                }
+
                return; //koniec cykla
             }
          }

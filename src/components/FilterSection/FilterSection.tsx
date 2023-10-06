@@ -37,6 +37,7 @@ export const FilterSection = ({
                   setLocations={setLocations}
                   seniority={seniority}
                   setSeniority={setSeniority}
+                  // tu powino być 1-2 props
                />
             ))}
          </div>

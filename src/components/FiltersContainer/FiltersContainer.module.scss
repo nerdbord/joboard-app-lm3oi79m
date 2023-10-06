@@ -20,3 +20,10 @@
    font: $semibold16;
    letter-spacing: -0.8px;
 }
+.clear_button {
+   cursor: pointer;
+   font: $medium12;
+   color: $accent-strong;
+   border: none;
+   background-color: transparent;
+}

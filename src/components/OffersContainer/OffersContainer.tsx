@@ -7,23 +7,11 @@ import { getJobOffers } from '../../services/offersApi';
 import SearchBar from '../SearchBar/SearchBar';
 import { OfferData } from '../../interfaces/OfferData';
 import { JobOffers } from '../../interfaces/JobOffers';
-interface OffersContainerProps {
-   jobTypes: string[];
-   locations: string[];
-   seniority: string[];
-   sliderValue: number;
-   salaryLevels: { min: number; max: number };
-   setSalaryLevels: React.Dispatch<{ min: number; max: number }>;
-}
+import { DataContext } from '../../context/DataContext';
+import { useContext } from 'react';
 
-const OffersContainer = ({
-   jobTypes,
-   locations,
-   sliderValue,
-   salaryLevels,
-   setSalaryLevels,
-   seniority,
-}: OffersContainerProps) => {
+const OffersContainer = () => {
+   const { jobTypes, locations, seniority, sliderValue, setSalaryLevels } = useContext(DataContext);
    const [localization, setLocalization] = useState('');
    const [jobTitle, setJobTitle] = useState('');
    const [seniorities, setSeniorities] = useState<string[]>([]);
@@ -41,6 +29,13 @@ const OffersContainer = ({
       setJobTitle(event.target.value);
    };
 
+   function handleClearFilters() {
+      setJobTitle('');
+      setLocalization('');
+      setSeniorities([]);
+      getFilteredJobOffers();
+   }
+
    const getFilteredJobOffers = async () => {
       const salariesFrom: number[] = [];
       const salariesTo: number[] = [];
@@ -52,12 +47,14 @@ const OffersContainer = ({
          const localizationMatch =
             !localization || offer.city.toLowerCase().startsWith(localization.toLowerCase());
          const jobTypeMatch =
-            jobTypes.length === 0 || jobTypes.some((jobType) => offer.jobType.includes(jobType));
+            jobTypes.length === 0 ||
+            jobTypes.some((jobType: string) => offer.jobType.includes(jobType));
          const locationMatch =
             locations.length === 0 ||
-            locations.some((location) => offer.workLocation.includes(location));
+            locations.some((location: string) => offer.workLocation.includes(location));
          const seniorityMatch =
-            seniority.length === 0 || seniority.some((rank) => offer.seniority.includes(rank));
+            seniority.length === 0 ||
+            seniority.some((rank: string) => offer.seniority.includes(rank));
          const slider = sliderValue < offer.salaryFrom;
 
          return (

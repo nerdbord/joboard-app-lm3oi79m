@@ -11,7 +11,7 @@ import { DataContext } from '../../context/DataContext';
 import { useContext } from 'react';
 
 const OffersContainer = () => {
-   const { jobTypes, locations, seniority, sliderValue, setSalaryLevels } = useContext(DataContext);
+   const { jobTypes, locations, seniority, sliderValue } = useContext(DataContext);
    const [localization, setLocalization] = useState('');
    const [jobTitle, setJobTitle] = useState('');
    const [seniorities, setSeniorities] = useState<string[]>([]);
@@ -37,8 +37,6 @@ const OffersContainer = () => {
    }
 
    const getFilteredJobOffers = async () => {
-      const salariesFrom: number[] = [];
-      const salariesTo: number[] = [];
       const response = await getJobOffers();
 
       const filteredData = response.filter((offer: OfferData) => {
@@ -55,8 +53,7 @@ const OffersContainer = () => {
          const seniorityMatch =
             seniority.length === 0 ||
             seniority.some((rank: string) => offer.seniority.includes(rank));
-         const slider = sliderValue < offer.salaryFrom;
-
+         const slider = sliderValue <= offer.salaryFrom;
          return (
             titleMatch &&
             localizationMatch &&
@@ -83,18 +80,13 @@ const OffersContainer = () => {
       setJobTitles(notDuplicateTitles as JobOffers[]);
       setData(filteredData);
 
-      filteredData.map((item: any) => {
-         salariesFrom.push(item.salaryFrom);
-         salariesTo.push(item.salaryTo);
-         setSalaryLevels({ min: Math.min(...salariesFrom), max: Math.max(...salariesTo) });
-      });
-
       return filteredData;
    };
 
    useEffect(() => {
       getFilteredJobOffers();
-   }, [jobTypes, locations, seniority]);
+   }, [jobTypes, locations, seniority, sliderValue]);
+   useEffect(() => {}, []);
 
    const { error, isLoading } = useQuery(
       ['jobOffers', localization, jobTitle, seniorities],

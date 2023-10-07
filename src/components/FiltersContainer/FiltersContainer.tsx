@@ -76,7 +76,6 @@ const FiltersContainer = () => {
                sliderValue={sliderValue}
                setSliderValue={setSliderValue}
                salaryLevels={salaryLevels}
-               setSalaryLevels={setSalaryLevels}
             />
          </section>
       </div>

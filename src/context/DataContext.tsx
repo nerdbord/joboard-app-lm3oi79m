@@ -35,8 +35,8 @@ const DataProvider = ({ children }: DataProviderProps) => {
    const [jobTypes, setJobTypes] = useState<string[] | any[]>([]);
    const [seniority, setSeniority] = useState<string[] | any[]>([]);
    const [locations, setLocations] = useState<string[] | any[]>([]);
-   const [sliderValue, setSliderValue] = useState<number>(10000);
-   const [salaryLevels, setSalaryLevels] = useState<SalaryLevelsData>({ min: 1, max: 20000 });
+   const [sliderValue, setSliderValue] = useState<number>(0);
+   const [salaryLevels, setSalaryLevels] = useState<SalaryLevelsData>({ min: 0, max: 160000 });
    const contextValue: DataContextType = {
       jobTypes,
       setJobTypes,

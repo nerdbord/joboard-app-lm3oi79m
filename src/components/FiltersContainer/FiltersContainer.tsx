@@ -22,7 +22,7 @@ const FiltersContainer = () => {
       sliderValue,
       setSliderValue,
       salaryLevels,
-      setSalaryLevels,
+      clearFilters,
    } = useContext(DataContext);
    const filterOptions: FilterOptions = {
       'Job type': ['Full-time', 'Part-time', 'Freelance', 'Contract'],
@@ -34,16 +34,11 @@ const FiltersContainer = () => {
       filterOptions['Job type'].includes(type),
    );
 
-   const handleClearFilter = () => {
-      setSeniority([]);
-      setJobTypes([]), setLocations([]);
-      // onChange (isChecked ? )
-   };
    return (
       <div className={styles.container}>
          <header className={styles.header}>
             <p className={styles.header_title}>Filter offers</p>
-            <button className={styles.clear_button} onClick={handleClearFilter}>
+            <button className={styles.clear_button} onClick={clearFilters}>
                Clear filters
             </button>
          </header>

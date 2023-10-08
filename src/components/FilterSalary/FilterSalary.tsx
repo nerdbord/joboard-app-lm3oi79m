@@ -1,4 +1,6 @@
-import React, { ChangeEvent } from 'react';
+// FilterSalary.tsx
+
+import React, { useState } from 'react';
 import * as styles from './FilterSalary.module.scss';
 
 interface FilterSalaryProps {
@@ -6,32 +8,30 @@ interface FilterSalaryProps {
    sliderValue: number;
    setSliderValue: (newValue: number) => void;
    salaryLevels: { min: number; max: number };
-   setSalaryLevels: React.Dispatch<{ min: number; max: number }>;
 }
-export const FilterSalary = ({
-   title,
-   sliderValue,
-   setSliderValue,
-   salaryLevels,
-   setSalaryLevels,
-}: FilterSalaryProps) => {
+
+export const FilterSalary = ({ sliderValue, setSliderValue }: FilterSalaryProps) => {
+   const left = sliderValue / 1255;
    function handleSalary(event: React.ChangeEvent<HTMLInputElement>) {
-      setSliderValue(parseInt(event.target.value));
+      const newValue = parseInt(event.target.value);
+      setSliderValue(newValue);
    }
 
    return (
-      <div className={styles.filter_section_wrapper}>
-         <p className={styles.filter_section_title}>{title}</p>
-         <div className={styles.slidecontainer}>
-            <input
-               type="range"
-               min={salaryLevels.min}
-               max={salaryLevels.max}
-               value={sliderValue}
-               className={styles.slider}
-               id="myRange"
-               onChange={handleSalary}
-            />
+      <div className={styles.slider_container}>
+         <span className={styles.filter_section_title}>Salary (min.)</span>
+
+         <input
+            type="range"
+            min="0"
+            max="120000"
+            step="1500"
+            value={sliderValue}
+            onChange={handleSalary}
+            className={styles.slider_filter}
+         />
+         <div className={styles.current_value} style={{ left: `${left}%` }}>
+            {sliderValue}
          </div>
       </div>
    );

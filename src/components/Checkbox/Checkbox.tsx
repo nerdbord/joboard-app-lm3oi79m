@@ -1,36 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Checkbox.module.scss';
 import { ReactComponent as UnCheckedIcon } from '@icons/UnCheckedIcon.svg';
 import { ReactComponent as CheckedIcon } from '@icons/CheckedIcon.svg';
 
 export interface CheckboxProps {
-   setJobTypes?: any;
-   jobTypes?: string[];
    label: string;
+   jobTypes?: string[];
+   setJobTypes?: React.Dispatch<React.SetStateAction<string[] | undefined>>;
    locations?: string[];
-   setLocations?: any;
+   setLocations?: React.Dispatch<React.SetStateAction<string[] | undefined>>;
    seniority?: string[];
-   setSeniority?: any;
+   setSeniority?: React.Dispatch<React.SetStateAction<string[] | undefined>>;
 }
+
 export const Checkbox = ({
    label,
-   jobTypes,
+   jobTypes = [],
    setJobTypes,
-   locations,
+   locations = [],
    setLocations,
-   seniority,
+   seniority = [],
    setSeniority,
 }: CheckboxProps) => {
-   const [isChecked, setIsChecked] = useState<boolean>(false);
+   const [isChecked, setIsChecked] = useState(
+      jobTypes.includes(label) || seniority.includes(label) || locations.includes(label),
+   );
+
+   useEffect(() => {
+      setIsChecked(
+         jobTypes.includes(label) || seniority.includes(label) || locations.includes(label),
+      );
+   }, [jobTypes, locations, seniority, label]);
+
    function handleClick() {
-      // handleclick ma zwracać tylko stan isChecked
       setIsChecked(!isChecked);
 
       const stateMap: Record<
          string,
          {
             state: string[] | undefined;
-            setState: React.Dispatch<React.SetStateAction<string[]>> | undefined;
+            setState: React.Dispatch<React.SetStateAction<string[] | undefined>> | undefined;
          }
       > = {
          jobTypes: { state: jobTypes, setState: setJobTypes },
@@ -49,7 +58,7 @@ export const Checkbox = ({
                   setState([...state, label]);
                }
 
-               return; //koniec cykla
+               return;
             }
          }
       }

@@ -1,0 +1,50 @@
+@use '../../scss/abstracts/' as *;
+
+.slider_container {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   width: 255px;
+}
+
+.slider_filter {
+   margin-top: 40px;
+   display: block;
+   width: 255px;
+   height: 4px;
+   appearance: none;
+   background: $gray-outline;
+   outline: none;
+   cursor: pointer;
+   &::-webkit-slider-thumb {
+      appearance: none;
+      background: $accent;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 0 7px white, 0 0 0 8px $accent;
+      width: 9px;
+      height: 9px;
+   }
+}
+
+.current_value {
+   display: block;
+   position: absolute;
+   bottom: 20px;
+   margin-left: 4px;
+   left: 7.5px;
+   transform: translateX(-50%);
+   color: var(--gray-dark, $gray-dark);
+   text-align: center;
+   font-size: 14px;
+   font-style: normal;
+   font-weight: 500;
+   line-height: 100%;
+}
+
+.filter_section_title {
+   color: $gray-darkest;
+   font: $semibold12;
+   text-align: left;
+}

@@ -6,6 +6,7 @@
    background: $white;
    margin: 110px;
    width: 303px;
+   height: 594px;
    @include breakpoint(tablet) {
       display: none;
    }

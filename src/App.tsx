@@ -6,6 +6,7 @@ import OffersContainer from './components/OffersContainer/OffersContainer';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { DataProvider } from './context/DataContext';
 const queryClient = new QueryClient();
+
 function App() {
    return (
       <QueryClientProvider client={queryClient}>

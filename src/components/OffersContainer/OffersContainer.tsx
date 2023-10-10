@@ -11,7 +11,7 @@ import { DataContext } from '../../context/DataContext';
 import { useContext } from 'react';
 
 const OffersContainer = () => {
-   const { jobTypes, locations, seniority } = useContext(DataContext);
+   const { jobTypes, locations, seniority, sliderValue } = useContext(DataContext);
    const [localization, setLocalization] = useState('');
    const [jobTitle, setJobTitle] = useState('');
    const [seniorities, setSeniorities] = useState<string[]>([]);
@@ -38,6 +38,7 @@ const OffersContainer = () => {
 
    const getFilteredJobOffers = async () => {
       const response = await getJobOffers();
+
       const filteredData = response.filter((offer: OfferData) => {
          const titleMatch =
             !jobTitle || offer.title.toLowerCase().startsWith(jobTitle.toLowerCase());
@@ -52,8 +53,15 @@ const OffersContainer = () => {
          const seniorityMatch =
             seniority.length === 0 ||
             seniority.some((rank: string) => offer.seniority.includes(rank));
-
-         return titleMatch && localizationMatch && jobTypeMatch && locationMatch && seniorityMatch;
+         const slider = sliderValue <= offer.salaryFrom;
+         return (
+            titleMatch &&
+            localizationMatch &&
+            jobTypeMatch &&
+            locationMatch &&
+            seniorityMatch &&
+            slider
+         );
       });
 
       const cities = filteredData.map((item: OfferData) => item.city);
@@ -74,9 +82,10 @@ const OffersContainer = () => {
 
       return filteredData;
    };
+
    useEffect(() => {
       getFilteredJobOffers();
-   }, [jobTypes, locations, seniority]);
+   }, [jobTypes, locations, seniority, sliderValue]);
 
    const { error, isLoading } = useQuery(
       ['jobOffers', localization, jobTitle, seniorities],

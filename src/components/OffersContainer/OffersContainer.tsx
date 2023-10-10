@@ -86,7 +86,6 @@ const OffersContainer = () => {
    useEffect(() => {
       getFilteredJobOffers();
    }, [jobTypes, locations, seniority, sliderValue]);
-   useEffect(() => {}, []);
 
    const { error, isLoading } = useQuery(
       ['jobOffers', localization, jobTitle, seniorities],

@@ -7,25 +7,16 @@ interface DataContextType {
    setLocations: (newValue: string[]) => void;
    seniority: string[];
    setSeniority: (newValue: string[]) => void;
-   sliderValue: any;
-   setSliderValue: any;
-   salaryLevels: any;
-   setSalaryLevels: any;
-   clearFilters: () => any;
+   sliderValue: number;
+   setSliderValue: (newValue: number) => void;
+   salaryLevels: SalaryLevelsData;
+   setSalaryLevels: (newValue: SalaryLevelsData) => void;
+   clearFilters: () => void;
 }
 interface SalaryLevelsData {
    min: number;
    max: number;
 }
-
-// export const initialData: DataContextType = {
-//    jobTypes,
-//    locations,
-//    setLocations,
-//    seniority,
-//    setSeniority,
-//    setJobTypes,
-// };
 
 export const DataContext = createContext<DataContextType | any>(undefined);
 
@@ -39,10 +30,10 @@ const DataProvider = ({ children }: DataProviderProps) => {
    const [sliderValue, setSliderValue] = useState<number>(0);
    const [salaryLevels, setSalaryLevels] = useState<SalaryLevelsData>({ min: 0, max: 160000 });
    const clearFilters = () => {
-      setJobTypes([]);
-      setSeniority([]);
-      setSeniority([]);
-      setSliderValue(0);
+      // setJobTypes([]);
+      // setSeniority([]);
+      // setSeniority([]);
+      // setSliderValue(0);
    };
 
    const contextValue: DataContextType = {

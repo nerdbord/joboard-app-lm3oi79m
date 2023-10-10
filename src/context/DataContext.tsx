@@ -30,10 +30,10 @@ const DataProvider = ({ children }: DataProviderProps) => {
    const [sliderValue, setSliderValue] = useState<number>(0);
    const [salaryLevels, setSalaryLevels] = useState<SalaryLevelsData>({ min: 0, max: 160000 });
    const clearFilters = () => {
-      // setJobTypes([]);
-      // setSeniority([]);
-      // setSeniority([]);
-      // setSliderValue(0);
+      setJobTypes([]);
+      setSeniority([]);
+      setLocations([]);
+      setSliderValue(0);
    };
 
    const contextValue: DataContextType = {

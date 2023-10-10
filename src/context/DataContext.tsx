@@ -32,7 +32,7 @@ const DataProvider = ({ children }: DataProviderProps) => {
    const clearFilters = () => {
       setJobTypes([]);
       setSeniority([]);
-      setSeniority([]);
+      setLocations([]);
       setSliderValue(0);
    };
 

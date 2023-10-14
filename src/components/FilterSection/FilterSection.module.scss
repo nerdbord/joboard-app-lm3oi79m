@@ -6,6 +6,8 @@
    align-items: flex-start;
    margin-bottom: 20px;
    width: 255px;
+   @include breakpoint(tablet) {
+   }
 }
 .filter_section_title {
    color: $gray-darkest;

@@ -1,0 +1,19 @@
+@use '../../scss/abstracts/' as *;
+.button {
+   border-radius: 54px;
+   padding: 10px 16px;
+   align-items: flex-start;
+   color: $gray-darkest;
+   font: $semibold16;
+   letter-spacing: -0.8px;
+}
+
+.openBtn {
+   border: 1px solid var(--Accent, #9564d4);
+   background: $white;
+}
+
+.closeBtn {
+   border: none;
+   background: $gray-lightest;
+}

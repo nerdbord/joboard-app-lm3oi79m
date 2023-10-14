@@ -24,6 +24,9 @@
    display: flex;
    gap: 9px;
    width: 115px;
+   @include breakpoint(tablet) {
+      height: 36px;
+   }
 }
 [aria-checked='true'] {
    left: 3px;

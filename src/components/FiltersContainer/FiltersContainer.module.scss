@@ -1,14 +1,29 @@
 @use '../../scss/abstracts/' as *;
+section {
+   @include breakpoint(tablet) {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+   }
+}
 .container {
    padding: 24px;
    border-radius: 5px;
    border: 1px solid $gray-light;
    background: $white;
-   margin: 110px;
+   margin: 40px;
    width: 303px;
-   height: 594px;
+   // height: 594px;
    @include breakpoint(tablet) {
-      display: none;
+      min-width: 800px;
+      border-radius: 5px;
+   }
+}
+.filter_wrapper {
+   @include breakpoint(tablet) {
+      min-width: 800px;
+      border-radius: 1px solid gray;
+      width: 100%;
    }
 }
 .header {
@@ -26,4 +41,35 @@
    color: $accent-strong;
    border: none;
    background-color: transparent;
+}
+.mobile_header {
+   margin: 20px;
+   min-width: 800px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.hidden {
+   @include breakpoint(tablet) {
+      display: none;
+   }
+}
+.logo {
+   margin-top: 43px;
+   color: $gray-darkest;
+   text-align: center;
+   font-family: Poppins;
+   font-size: 27px;
+   font-weight: 700;
+   letter-spacing: -1.89px;
+   @include breakpoint(tablet) {
+      display: none;
+   }
+}
+.line {
+   @include breakpoint(tablet) {
+      border-bottom: 1px solid $gray-light;
+      background-color: #dadada;
+   }
 }

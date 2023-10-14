@@ -12,8 +12,8 @@ const OffersList: React.FC<OffersListProps> = ({ offers }) => {
       return null;
    }
    return (
-      //d
       <div className={styles.container}>
+         <span className={styles.offers_counter}>{offers.length} offers found</span>
          <ul className={styles.list}>
             {offers.map((offer) => (
                <li key={offer._id} className={styles.list_element}>
@@ -32,6 +32,7 @@ const OffersList: React.FC<OffersListProps> = ({ offers }) => {
                      seniority={offer.seniority}
                      technologies={offer.technologies}
                      updatedAt={offer.updatedAt}
+                     workLocation={''}
                   />
                   <span className={styles.offer_date}>3 days ago</span>
                </li>

@@ -117,7 +117,7 @@ const OffersContainer = () => {
                locations={searchLocations}
                jobTitles={jobTitles}
             />
-            <span className={styles.offers_counter}>{data.length} offers found</span>
+            {/* <span className={styles.offers_counter}>{data.length} offers found</span> */}
 
             {getOfferUI()}
          </div>

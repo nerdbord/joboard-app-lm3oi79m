@@ -3,7 +3,10 @@
    position: relative;
    background: $white;
    width: 797px;
-   height: 94px;
+   height: 100vh;
+   position: relative;
+   text-align: start;
+   margin-top: 24px;
 }
 
 .list {
@@ -30,6 +33,7 @@
    min-width: 800px;
    cursor: pointer;
    //    height: 92px;
+   width: 100%;
    display: flex;
    justify-content: space-between;
    border-radius: 5px;

@@ -18,7 +18,6 @@ const OfferDetailsModal: React.FC<{ id: string }> = ({ id }) => {
    const getJobOffer = async () => {
       const response = await getJobOfferById(id);
       setOfferData(response);
-      console.log(response);
       return response;
    };
    const { error, isLoading } = useQuery(['jobOffer'], getJobOffer);

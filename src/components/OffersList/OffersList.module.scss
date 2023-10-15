@@ -1,5 +1,6 @@
 @use '../../scss/abstracts/' as *;
 .container {
+   position: relative;
    background: $white;
    width: 797px;
    height: 94px;
@@ -27,6 +28,7 @@
 .list_element {
    background-color: white;
    min-width: 800px;
+   cursor: pointer;
    //    height: 92px;
    display: flex;
    justify-content: space-between;

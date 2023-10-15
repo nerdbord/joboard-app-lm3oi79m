@@ -9,6 +9,7 @@ import { OfferData } from '../../interfaces/OfferData';
 import { JobOffers } from '../../interfaces/JobOffers';
 import { DataContext } from '../../context/DataContext';
 import { useContext } from 'react';
+import OfferDetailsModal from '../Modal/OfferDetailsModal';
 
 const OffersContainer = () => {
    const { jobTypes, locations, seniority, sliderValue } = useContext(DataContext);
@@ -91,7 +92,6 @@ const OffersContainer = () => {
       ['jobOffers', localization, jobTitle, seniorities],
       getFilteredJobOffers,
    );
-
    const getOfferUI = () => {
       if (isLoading) {
          return <div>Loading...</div>;

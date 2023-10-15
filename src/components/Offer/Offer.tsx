@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './Offer.module.scss'; // Import the SCSS module
 import { OfferProps } from '../../interfaces/OfferProps';
 import { OfferData } from '../../interfaces/OfferData';
+import { DataContext } from '../../context/DataContext';
 
 const Offer: React.FC<OfferData> = ({
    _id,
@@ -19,8 +20,12 @@ const Offer: React.FC<OfferData> = ({
    technologies,
    updatedAt,
 }) => {
+   const { openModal } = useContext(DataContext);
+   const openModalHandler = () => {
+      openModal();
+   };
    return (
-      <div className={styles.job_title_wrapper}>
+      <div onClick={openModalHandler} className={styles.job_title_wrapper}>
          <img className={styles.company_logo_desktop} src={offerUrl} alt="company logo" />
          <div className={styles.test}>
             <span className={styles.job_title}>{title}</span>

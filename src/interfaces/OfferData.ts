@@ -3,6 +3,7 @@ export interface OfferData {
    title: string;
    city: string;
    companyName: string;
+   image: string;
    createdAt: string;
    currency: string;
    description: string;
@@ -14,4 +15,5 @@ export interface OfferData {
    seniority: string;
    technologies: string[];
    updatedAt: string;
+   country: string;
 }

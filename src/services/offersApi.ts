@@ -12,3 +12,14 @@ export const getJobOffers = async (params?: any): Promise<any> => {
    const data = await response.json();
    return data;
 };
+export const getJobOfferById = async (id: string): Promise<any> => {
+   const response = await fetch(API_BASE_URL + `/${id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+   });
+   if (!response.ok) {
+      throw new Error('problem with fetching job offers');
+   }
+   const data = await response.json();
+   return data;
+};

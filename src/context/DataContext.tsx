@@ -12,6 +12,12 @@ interface DataContextType {
    salaryLevels: SalaryLevelsData;
    setSalaryLevels: (newValue: SalaryLevelsData) => void;
    clearFilters: () => void;
+   openModal: (id: string) => void;
+   closeModal: () => void;
+   isModalOpen: boolean;
+   setIsModalOpen: (newValue: boolean) => void;
+   selectedOfferId: string | null;
+   setSelectedOfferId: (newValue: string) => any;
 }
 interface SalaryLevelsData {
    min: number;
@@ -29,11 +35,19 @@ const DataProvider = ({ children }: DataProviderProps) => {
    const [locations, setLocations] = useState<string[] | any[]>([]);
    const [sliderValue, setSliderValue] = useState<number>(0);
    const [salaryLevels, setSalaryLevels] = useState<SalaryLevelsData>({ min: 0, max: 160000 });
+   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+   const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);
    const clearFilters = () => {
       setJobTypes([]);
       setSeniority([]);
       setLocations([]);
       setSliderValue(0);
+   };
+   const openModal = (id: string) => {
+      setIsModalOpen((prevState) => !prevState);
+   };
+   const closeModal = () => {
+      setIsModalOpen(false);
    };
 
    const contextValue: DataContextType = {
@@ -48,6 +62,12 @@ const DataProvider = ({ children }: DataProviderProps) => {
       salaryLevels,
       setSalaryLevels,
       clearFilters,
+      isModalOpen,
+      setIsModalOpen,
+      selectedOfferId,
+      setSelectedOfferId,
+      openModal,
+      closeModal,
    };
 
    return <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>;

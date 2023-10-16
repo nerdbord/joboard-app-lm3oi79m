@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler, useContext, useState } from 'react';
 import styles from './OffersList.module.scss';
 import Offer from '../Offer/Offer';
 import { OfferData } from '../../interfaces/OfferData';
@@ -12,33 +12,36 @@ const OffersList: React.FC<OffersListProps> = ({ offers }) => {
       return null;
    }
    return (
-      <div className={styles.container}>
-         <span className={styles.offers_counter}>{offers.length} offers found</span>
-         <ul className={styles.list}>
-            {offers.map((offer) => (
-               <li key={offer._id} className={styles.list_element}>
-                  <Offer
-                     _id={offer._id}
-                     title={offer.title}
-                     city={offer.city}
-                     companyName={offer.companyName}
-                     createdAt={offer.createdAt}
-                     currency={offer.currency}
-                     description={offer.description}
-                     jobType={offer.jobType}
-                     offerUrl={offer.offerUrl}
-                     salaryFrom={offer.salaryFrom}
-                     salaryTo={offer.salaryTo}
-                     seniority={offer.seniority}
-                     technologies={offer.technologies}
-                     updatedAt={offer.updatedAt}
-                     workLocation={''}
-                  />
-                  <span className={styles.offer_date}>3 days ago</span>
-               </li>
-            ))}
-         </ul>
-      </div>
+      <>
+         <div className={styles.container}>
+            <ul className={styles.list}>
+               {offers.map((offer) => (
+                  <li key={offer._id} className={styles.list_element}>
+                     <Offer
+                        _id={offer._id}
+                        title={offer.title}
+                        city={offer.city}
+                        image={offer.image}
+                        companyName={offer.companyName}
+                        createdAt={offer.createdAt}
+                        currency={offer.currency}
+                        description={offer.description}
+                        jobType={offer.jobType}
+                        offerUrl={offer.offerUrl}
+                        salaryFrom={offer.salaryFrom}
+                        salaryTo={offer.salaryTo}
+                        workLocation={offer.workLocation}
+                        seniority={offer.seniority}
+                        technologies={offer.technologies}
+                        updatedAt={offer.updatedAt}
+                        country={offer.country}
+                     />
+                     <span className={styles.offer_date}>3 days ago</span>
+                  </li>
+               ))}
+            </ul>
+         </div>
+      </>
    );
 };
 export default OffersList;

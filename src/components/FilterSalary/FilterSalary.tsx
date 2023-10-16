@@ -1,6 +1,6 @@
 // FilterSalary.tsx
 
-import React, { useState } from 'react';
+import React from 'react';
 import * as styles from './FilterSalary.module.scss';
 
 interface FilterSalaryProps {

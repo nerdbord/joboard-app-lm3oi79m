@@ -91,7 +91,6 @@ const OffersContainer = () => {
       ['jobOffers', localization, jobTitle, seniorities],
       getFilteredJobOffers,
    );
-
    const getOfferUI = () => {
       if (isLoading) {
          return <div>Loading...</div>;

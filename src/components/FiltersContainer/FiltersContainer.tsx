@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import styles from './FiltersContainer.module.scss';
-import { FilterSection } from '../FilterSection/FilterSection';
+import FilterSection from '../FilterSection/FilterSection';
 import { FilterSalary } from '../FilterSalary/FilterSalary';
 import { useContext } from 'react';
 import { DataContext } from '../../context/DataContext';

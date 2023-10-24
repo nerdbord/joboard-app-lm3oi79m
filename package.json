@@ -12,6 +12,8 @@
       "format": "npx prettier --write **/*.{js,jsx,scss,css}"
    },
    "dependencies": {
+      "install": "^0.13.0",
+      "npm": "^10.2.1",
       "react": "^18.2.0",
       "react-dom": "^18.2.0",
       "react-query": "^3.39.3",
@@ -23,7 +25,7 @@
       "@testing-library/react": "^14.0.0",
       "@types/react": "^18.0.28",
       "@types/react-dom": "^18.0.11",
-      "@vitejs/plugin-react": "^3.1.0",
+      "@vitejs/plugin-react": "^4.1.0",
       "husky": "^8.0.0",
       "jsdom": "^22.1.0",
       "prettier": "^2.8.7",

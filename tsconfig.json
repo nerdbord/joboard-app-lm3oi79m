@@ -8,7 +8,7 @@
       "strict": true,
       "skipLibCheck": true,
       "outDir": "dist",
-      "types": ["vitest/importMeta"]
+      "types": ["vitest/importMeta", "@testing-library/jest-dom"]
    },
    "include": ["src/**/*.ts", "src/**/*.tsx", "global.d.ts"],
    "exclude": ["node_modules"]

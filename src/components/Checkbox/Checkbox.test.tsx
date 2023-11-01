@@ -28,3 +28,25 @@ test('Checkbox toggles off when clicked again', () => {
    expect(screen.getAllByRole('checkbox', { checked: false }));
    expect(handleFilterMock).toHaveBeenCalledWith('Full-time');
 });
+
+const props2: CheckboxProps = {
+   label: 'Senior',
+   checked: false,
+   handleFilter: handleFilterMock,
+};
+
+test('Checkbox toggles when clicked', () => {
+   render(<Checkbox {...props2} />);
+   const checkbox = screen.getByRole('checkbox');
+   fireEvent.click(checkbox);
+   expect(screen.getAllByRole('checkbox', { checked: true }));
+   expect(handleFilterMock).toHaveBeenCalledWith('Senior');
+});
+
+test('Checkbox toggles off when clicked again', () => {
+   render(<Checkbox {...props2} checked={true} />);
+   const checkbox = screen.getByRole('checkbox');
+   fireEvent.click(checkbox);
+   expect(screen.getAllByRole('checkbox', { checked: false }));
+   expect(handleFilterMock).toHaveBeenCalledWith('Senior');
+});

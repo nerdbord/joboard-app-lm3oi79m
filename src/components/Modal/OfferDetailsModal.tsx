@@ -1,7 +1,7 @@
 import * as styles from './OfferDetailsModal.module.scss';
 import React, { useContext, useEffect, useState } from 'react';
 import closeIcon from '@images/Close.svg';
-import { useQueries, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import { getJobOfferById } from '../../services/offersApi';
 import { DataContext } from '../../context/DataContext';
 import { OfferData } from '../../interfaces/OfferData';
@@ -10,6 +10,13 @@ interface OfferDetailModalProps {
 }
 
 const OfferDetailsModal: React.FC<{ id: string }> = ({ id }) => {
+   function countDaysAgo(createdAt: string): number {
+      const createdAtDate = new Date(createdAt);
+      const current = new Date();
+      const timeDifference = current.getTime() - createdAtDate.getTime();
+      const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      return daysDifference;
+   }
    const { closeModal } = useContext(DataContext);
    const [offerData, setOfferData] = useState<OfferData | null>(null);
    const closeModalHandler = () => {
@@ -66,7 +73,9 @@ const OfferDetailsModal: React.FC<{ id: string }> = ({ id }) => {
                            <div className={styles.right_area}>
                               <div className={styles.description_item}>
                                  <span className={styles.list_element_header}>Added</span>
-                                 <p className={styles.data_item}>{offerData.createdAt}</p>
+                                 <p className={styles.data_item}>
+                                    {countDaysAgo(offerData.createdAt)} days ago
+                                 </p>
                               </div>
                               <div className={styles.line}></div>
                               <div className={styles.description_item}>
@@ -98,6 +107,7 @@ const OfferDetailsModal: React.FC<{ id: string }> = ({ id }) => {
                                  <span className={styles.list_element_header}>Salary</span>
                                  <p className={styles.data_item}>
                                     {offerData.salaryFrom}-{offerData.salaryTo}
+                                    {offerData.currency}
                                  </p>
                               </div>
                            </div>

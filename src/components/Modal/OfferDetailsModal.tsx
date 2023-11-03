@@ -1,23 +1,17 @@
 import * as styles from './OfferDetailsModal.module.scss';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import closeIcon from '@images/Close.svg';
 import { useQuery } from 'react-query';
 import { getJobOfferById } from '../../services/offersApi';
-import { DataContext } from '../../context/DataContext';
 import { OfferData } from '../../interfaces/OfferData';
+import countDaysAgo from '../../utils';
+import { ModalContext } from '../../context/ModalContext';
 interface OfferDetailModalProps {
    id: string;
 }
 
 const OfferDetailsModal: React.FC<{ id: string }> = ({ id }) => {
-   function countDaysAgo(createdAt: string): number {
-      const createdAtDate = new Date(createdAt);
-      const current = new Date();
-      const timeDifference = current.getTime() - createdAtDate.getTime();
-      const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-      return daysDifference;
-   }
-   const { closeModal } = useContext(DataContext);
+   const { closeModal } = useContext(ModalContext);
    const [offerData, setOfferData] = useState<OfferData | null>(null);
    const closeModalHandler = () => {
       closeModal();
@@ -49,7 +43,7 @@ const OfferDetailsModal: React.FC<{ id: string }> = ({ id }) => {
                         <img
                            className={styles.company_logo}
                            src={offerData.image}
-                           alt="image of offer"
+                           alt={offerData.title}
                         />
                         <div className={styles.title_wrapper}>
                            <span className={styles.title}>{offerData.title}</span>

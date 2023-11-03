@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styles from './Offer.module.scss'; // Import the SCSS module
 import { OfferProps } from '../../interfaces/OfferProps';
 import { OfferData } from '../../interfaces/OfferData';
-import { DataContext } from '../../context/DataContext';
+import { ModalContext } from '../../context/ModalContext';
 
 const Offer: React.FC<OfferData> = ({
    _id,
@@ -21,9 +21,9 @@ const Offer: React.FC<OfferData> = ({
    updatedAt,
    image,
 }) => {
-   const { openModal } = useContext(DataContext);
+   const { openModal } = useContext(ModalContext);
    const openModalHandler = () => {
-      openModal();
+      openModal(_id);
    };
    return (
       <div onClick={openModalHandler} className={styles.job_title_wrapper}>

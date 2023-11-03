@@ -1,17 +1,17 @@
-import React, { MouseEventHandler, useContext, useState } from 'react';
+import React, { MouseEventHandler, useContext } from 'react';
 import styles from './OffersList.module.scss';
 import Offer from '../Offer/Offer';
 import { OfferData } from '../../interfaces/OfferData';
 import { DataContext } from '../../context/DataContext';
-import OfferDetailsModal from '../Modal/OfferDetailsModal';
+import { ModalContext } from '../../context/ModalContext';
 
 interface OffersListProps {
    offers: OfferData[];
 }
 
 const OffersList: React.FC<OffersListProps> = ({ offers }) => {
-   const { selectedOfferId, setSelectedOfferId, isModalOpen, setIsModalOpen } =
-      useContext(DataContext);
+   const { setSelectedOfferId } = useContext(DataContext);
+   const { setIsModalOpen } = useContext(ModalContext);
 
    const openModal: MouseEventHandler<HTMLLIElement> = (event) => {
       const clickedOfferId = event.currentTarget.getAttribute('data-offer-id');

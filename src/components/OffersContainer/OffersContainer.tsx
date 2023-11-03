@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './OffersContainer.module.scss';
 import OffersList from '../OffersList/OffersList';
-
 import { useQuery } from 'react-query';
 import { getJobOffers } from '../../services/offersApi';
 import SearchBar from '../SearchBar/SearchBar';

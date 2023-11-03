@@ -3,13 +3,13 @@ import './App.css';
 import { Container } from './components/Container/Container';
 import FiltersContainer from './components/FiltersContainer/FiltersContainer';
 import OffersContainer from './components/OffersContainer/OffersContainer';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { DataContext, DataProvider } from './context/DataContext';
+import { DataContext } from './context/DataContext';
 import OfferDetailsModal from './components/Modal/OfferDetailsModal';
-const queryClient = new QueryClient();
+import { ModalContext } from './context/ModalContext';
 
 function App() {
-   const { selectedOfferId, isModalOpen } = useContext(DataContext);
+   const { isModalOpen } = useContext(ModalContext);
+   const { selectedOfferId } = useContext(DataContext);
    return (
       <Container>
          <FiltersContainer />

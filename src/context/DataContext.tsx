@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, ReactNode, useContext } from 'react';
+import React, { createContext, useState, ReactNode } from 'react';
 
 interface DataContextType {
    jobTypes: string[];
@@ -12,10 +12,10 @@ interface DataContextType {
    salaryLevels: SalaryLevelsData;
    setSalaryLevels: (newValue: SalaryLevelsData) => void;
    clearFilters: () => void;
-   openModal: (id: string) => void;
-   closeModal: () => void;
-   isModalOpen: boolean;
-   setIsModalOpen: (newValue: boolean) => void;
+   //  openModal: (id: string) => void;
+   //  closeModal: () => void;
+   //  isModalOpen: boolean;
+   //  setIsModalOpen: (newValue: boolean) => void;
    selectedOfferId: string | null;
    setSelectedOfferId: (newValue: string) => any;
 }
@@ -35,7 +35,7 @@ const DataProvider = ({ children }: DataProviderProps) => {
    const [locations, setLocations] = useState<string[] | any[]>([]);
    const [sliderValue, setSliderValue] = useState<number>(0);
    const [salaryLevels, setSalaryLevels] = useState<SalaryLevelsData>({ min: 0, max: 160000 });
-   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+   //  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
    const [selectedOfferId, setSelectedOfferId] = useState<string | null>(null);
    const clearFilters = () => {
       setJobTypes([]);
@@ -43,12 +43,13 @@ const DataProvider = ({ children }: DataProviderProps) => {
       setLocations([]);
       setSliderValue(0);
    };
-   const openModal = (id: string) => {
-      setIsModalOpen((prevState) => !prevState);
-   };
-   const closeModal = () => {
-      setIsModalOpen(false);
-   };
+
+   //  const openModal = (id: string) => {
+   //     setIsModalOpen((prevState) => !prevState);
+   //  };
+   //  const closeModal = () => {
+   //     setIsModalOpen(false);
+   //  };
 
    const contextValue: DataContextType = {
       jobTypes,
@@ -62,12 +63,12 @@ const DataProvider = ({ children }: DataProviderProps) => {
       salaryLevels,
       setSalaryLevels,
       clearFilters,
-      isModalOpen,
-      setIsModalOpen,
+      // isModalOpen,
+      // setIsModalOpen,
       selectedOfferId,
       setSelectedOfferId,
-      openModal,
-      closeModal,
+      // openModal,
+      // closeModal,
    };
 
    return <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>;

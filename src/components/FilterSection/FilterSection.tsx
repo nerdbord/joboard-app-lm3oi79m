@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './FilterSection.module.scss';
 import { Checkbox } from '../Checkbox/Checkbox';
 
-interface FilterSectionProps {
+export interface FilterSectionProps {
    title: string;
    options: string[];
    jobTypes?: string[];
@@ -13,7 +13,7 @@ interface FilterSectionProps {
    setSeniority?: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export const FilterSection = ({
+const FilterSection = ({
    title,
    options,
    jobTypes = [],
@@ -68,3 +68,4 @@ export const FilterSection = ({
       </div>
    );
 };
+export default FilterSection;

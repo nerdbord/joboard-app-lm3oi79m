@@ -7,6 +7,9 @@
    position: relative;
    text-align: start;
    margin-top: 24px;
+   @include breakpoint(tablet) {
+      width: 100%;
+   }
 }
 
 .list {

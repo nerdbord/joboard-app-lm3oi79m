@@ -15,13 +15,16 @@ section {
    width: 303px;
    // height: 594px;
    @include breakpoint(tablet) {
-      min-width: 800px;
+      // min-width: 800px;
+      width: 100%;
       border-radius: 5px;
+      margin: 0px;
+      padding: 14px;
    }
 }
 .filter_wrapper {
    @include breakpoint(tablet) {
-      min-width: 800px;
+      min-width: 100%;
       border-radius: 1px solid gray;
       width: 100%;
    }
@@ -44,10 +47,14 @@ section {
 }
 .mobile_header {
    margin: 20px;
-   min-width: 800px;
+   // min-width: 800px;
    display: flex;
    justify-content: space-between;
    align-items: center;
+   @include breakpoint(tablet) {
+      margin: 0;
+      width: 100%;
+   }
 }
 
 .hidden {

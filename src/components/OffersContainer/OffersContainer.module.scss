@@ -14,11 +14,11 @@
    background-color: $gray-lightest;
    width: 877px;
    height: 1081px;
-
    flex-shrink: 0;
    @include breakpoint(tablet) {
       display: flex;
       flex-direction: column;
+      width: 100%;
    }
 }
 .search_container {
@@ -28,4 +28,9 @@
 }
 .container {
    padding: 40px;
+   @include breakpoint(tablet) {
+      padding: 0px;
+      background-color: salmon;
+      width: 768px;
+   }
 }
